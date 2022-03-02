@@ -105,3 +105,13 @@ h1, h2, h3, h4, h5, h6 {
 .blog-footer p:last-child {
     margin-bottom: 0;
 }
+
+#company_logo {
+    border: 1px grey solid;
+    border-radius: 15px;
+    height: 75px;
+    padding: 10px;
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 5px 15px -6px #777;
+}

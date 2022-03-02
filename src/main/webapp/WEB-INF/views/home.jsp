@@ -28,8 +28,8 @@
 						<h1 class="display-5 fw-bold lh-1 mb-3">금융 소식 여기 모여라</h1>
 						<p class="lead">많고 많은 금융 소식을 한곳에 글로 스탁에서! 종목별로! 업종별로!</p>
 						<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-							<button type="button" class="btn btn-primary btn-lg px-4 me-md-2">로그인</button>
-							<button type="button" class="btn btn-outline-secondary btn-lg px-4">회원가입</button>
+							<button type="button" class="btn btn-primary btn-lg px-4 me-md-2" onclick="location.href='user/login'">로그인</button>
+							<button type="button" class="btn btn-outline-secondary btn-lg px-4" onclick="location.href='user/join'">회원가입</button>
 						</div>
 					</div>
 				</div>
@@ -93,7 +93,9 @@
 			</div>
 		</div>
 	</main>
-	<%@include file="include/footer.jsp"%>
+	
 </div>
+<%@include file="include/footer.jsp"%>
 </body>
+
 </html>

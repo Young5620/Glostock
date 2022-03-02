@@ -10,9 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 
- <%@ include file="../include/header.jsp" %>
+
 <style>
-  
+  	.container {
+  	width:1000px;}
     .input-form {
       max-width: 100px;
       margin-top: 80px;
@@ -29,7 +30,9 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
-    
+    body {
+    background: linear-gradient(to right, #61E6DC, #FDEBE2);
+	}
     
   </style>
 
@@ -37,9 +40,11 @@
 
 
 <body>
+ <%@ include file="../include/header.jsp" %>
 <br>
 <br> 
   <div class="container">
+  <main class="form-join">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
        <div align="center"> <h2 class="mb-3"><b>회원가입</b></h4></div>
@@ -116,7 +121,8 @@
         </form>
       </div>
     </div>
-
+    </main>
+</div>
 
 
 

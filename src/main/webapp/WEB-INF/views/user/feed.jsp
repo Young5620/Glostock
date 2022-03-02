@@ -32,6 +32,7 @@
       border: #E5E5E5 1px solid;
       padding: 25px;
       border-radius: 20px;
+      background-color: white;
     }
 
     .bd-placeholder-img {
@@ -48,8 +49,18 @@
       }
     }
     body {
-    background: linear-gradient(to right, #61E6DC, #FDEBE2);
+      background: linear-gradient(to bottom right, #54E6DE, pink);
 	}
+
+    .main-banner {
+      background-image: url("/resources/img/main-feed-img.jpg");
+      background-position: center;
+    }
+
+    .card {
+      margin-bottom: 5px;
+    }
+
   </style>
 
 
@@ -101,7 +112,7 @@
 
 
 <main class="container">
-  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark main-banner">
     <div class="col-md-6 px-0">
       <h1 class="display-4 fst-italic">요즘 멘션이 많은 종목 TOP 10</h1>
       <p class="lead my-3">요즘 뭐가 대세인지 모르겠다고요? 좀처럼 감을 잡을 실 수 없으시다고요? <br> 그래서 준비했습니다!</p>
@@ -112,7 +123,7 @@
   <div class="row mb-2">
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
+        <div class="col p-4 d-flex flex-column position-static bg-white">
           <strong class="d-inline-block mb-2 text-primary">Personal Analysis</strong>
           <h3 class="mb-0">월드 리포드 Vol. 3</h3>
           <div class="mb-1 text-muted">Feb 25</div>
@@ -127,7 +138,7 @@
     </div>
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
+        <div class="col p-4 d-flex flex-column position-static bg-white">
           <strong class="d-inline-block mb-2 text-success">Design</strong>
           <h3 class="mb-0">Post title</h3>
           <div class="mb-1 text-muted">Nov 11</div>
@@ -298,21 +309,54 @@
 
     <div class="col-md-4">
       <div class="position-sticky" style="top: 2rem;">
-        <div class="p-4 mb-3 bg-light rounded">
-          <h4 class="fst-italic">My Tab</h4>
-          <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
-        </div>
+<%--        <div class="p-4 mb-3 bg-light rounded">--%>
+<%--          <h4 class="fst-italic">My Tab</h4>--%>
+<%--          <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>--%>
+<%--        </div>--%>
 
         <div class="p-4">
           <h4 class="fst-italic">My Following</h4>
           <ol class="list-unstyled mb-0">
-            <li><a href="#">$TSLA</a></li>
-            <li><a href="#">$AAPL</a></li>
-            <li><a href="#">$MSFT</a></li>
-            <li><a href="#">$AMZN</a></li>
-            <li><a href="#">$FB</a></li>
-            <li><a href="#">$GOOGL</a></li>
-            <li><a href="#">ADIDAS</a></li>
+            <li>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="/company/show?ticker=TSLA">$TSLA</a></h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="/company/show?ticker=AAPL">$AAPL</a></h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="/company/show?ticker=MSFT">$MSFT</a></h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="/company/show?ticker=AMZN">$AMZN</a></h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="/company/show?ticker=FB">$FB</a></h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </li>
           </ol>
         </div>
 
@@ -329,13 +373,7 @@
   </div>
 
 </main>
-
-<footer class="blog-footer">
-  <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-  <p>
-    <a href="#">Back to top</a>
-  </p>
-</footer>
+<%@ include file="../include/footer.jsp" %>
 
 
 

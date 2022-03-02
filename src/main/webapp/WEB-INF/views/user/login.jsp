@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-     <%@ include file="../include/header.jsp" %>
+
     <!doctype html>
 <html lang="en">
   <head>
@@ -51,11 +51,6 @@
       text-align: center; 
       
       }
-  
-     html {
-    min-height: 100%;
-	}
-
 	body {
     background: linear-gradient(to right, #61E6DC, #FDEBE2);
 	}
@@ -69,11 +64,11 @@
     
     
   </head>
-  
-  <div class="wrapper">
+
+
   <body class="text-center" >
-  
- 
+   <%@ include file="../include/header.jsp" %>
+  <div class="wrapper"> 
 <main class="form-signin">
 
   <form>
@@ -98,9 +93,9 @@
 
     <p class="mt-5 mb-3 text-muted">&copy; 2022 GloStock. All rights reserved </p>
   </form>
-  </div>
+  
 </main>
-
+</div>
 
     
   </body>

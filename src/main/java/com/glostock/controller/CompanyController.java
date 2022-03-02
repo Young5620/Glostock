@@ -10,7 +10,7 @@ public class CompanyController {
     //로그인페이지
     @RequestMapping("/show")
     public String login() {
-        return "company/show";
+        return "redirect:/company/show";
     }
 
 }
