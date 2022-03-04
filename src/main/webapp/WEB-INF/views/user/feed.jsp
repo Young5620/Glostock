@@ -1,8 +1,28 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.math.BigDecimal"%>
+<%@page import="yahoofinance.YahooFinance"%>
+<%@page import="yahoofinance.Stock"%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+  Stock TSLA = YahooFinance.get("TSLA");
+  Stock AAPL = YahooFinance.get("AAPL");
+  Stock MSFT = YahooFinance.get("MSFT");
+  Stock AMZN = YahooFinance.get("AMZN");
+  Stock FB = YahooFinance.get("FB");
+  Stock ADS = YahooFinance.get("ADS.DE");
+
+  ArrayList<Stock> stockFollowList = new ArrayList<>();
+  stockFollowList.add(TSLA);
+  stockFollowList.add(AAPL);
+  stockFollowList.add(MSFT);
+  stockFollowList.add(AMZN);
+  stockFollowList.add(FB);
+  stockFollowList.add(ADS);
+%>
+
 <!doctype html>
-
-
-
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -14,13 +34,6 @@
 
   <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
-  <link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-  <link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
   <meta name="theme-color" content="#7952b3">
 
 
@@ -59,6 +72,19 @@
 
     .card {
       margin-bottom: 5px;
+      flex-direction: row !important;
+    }
+
+    .card-header {
+      margin: auto !important;
+      background-color: white !important;
+      border: 0 !important;
+      width: 40% !important;
+      text-align: center;
+    }
+
+    .card-body {
+      text-align: center;
     }
 
   </style>
@@ -66,6 +92,7 @@
 
   <!-- Custom styles for this template -->
   <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+  
   <!-- Custom styles for this template -->
   <link href="/resources/css/feed.css" rel="stylesheet">
 </head>
@@ -86,27 +113,24 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Feed</a>
+            <a class="nav-link" href="/user/feed">My Feed</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Following</a>
+            <a class="nav-link" href="/user/follow">My Following</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Europe</a>
+            <a class="nav-link" href="/user/service">My Service</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Hong Kong</a>
+            <a class="nav-link" href="/user/portfolio">My Portfolio</a>
           </li>
         </ul>
-        <form>
-          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-        </form>
          &nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-outline-secondary" href="#">My Account</a>
       </div>
     </div>
   </nav>
   </div>
-  </header>
+</header>
 
   
 
@@ -131,22 +155,23 @@
           <a href="#" class="stretched-link">이번주 월드 리포드 보기</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
+<%--          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>--%>
+          <img src="/resources/img/world-report-thumbnail2.jpg" width="200" height="250">
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static bg-white">
-          <strong class="d-inline-block mb-2 text-success">Design</strong>
-          <h3 class="mb-0">Post title</h3>
-          <div class="mb-1 text-muted">Nov 11</div>
-          <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="stretched-link">Continue reading</a>
+          <strong class="d-inline-block mb-2 text-success">Daily Report</strong>
+          <h3 class="mb-0">데일리 리포트</h3>
+          <div class="mb-1 text-muted">Mar 3</div>
+          <p class="mb-auto">제 20대 대통령 선거 D-6일... 각 후보들의 경제와 외교 정책들을 살펴보는 시리즈... 오늘은 기호 1번 이재명 후보입니다.</p>
+          <a href="#" class="stretched-link">더 읽기...</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+<%--          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>--%>
+          <img src="/resources/img/daily-report-thumbnail.jpg" width="200" height="250">
 
         </div>
       </div>
@@ -155,7 +180,9 @@
 
   <div class="row g-5">
     <div class="col-md-8">
-      <a class="btn btn-sm btn-outline-primary" href="#">글 쓰기</a>
+      <div style="float:right;">
+      <a class="btn btn-outline-light" href="write" style="color: #000;"><strong>Regist</strong></a>
+      </div>
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
         My Feed
       </h3>
@@ -301,8 +328,8 @@
       </article>
 
       <nav class="blog-pagination" aria-label="Pagination">
-        <a class="btn btn-outline-primary" href="#">Older</a>
-        <a class="btn btn-outline-secondary disabled">Newer</a>
+        <a class="btn btn-outline-primary" href="#">위로</a>
+        <a class="btn btn-outline-secondary">더보기</a>
       </nav>
 
     </div>
@@ -315,50 +342,49 @@
 <%--        </div>--%>
 
         <div class="p-4">
-          <h4 class="fst-italic">My Following</h4>
+          <h4>My Following</h4>
           <ol class="list-unstyled mb-0">
-            <li>
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="/company/show?ticker=TSLA">$TSLA</a></h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="/company/show?ticker=AAPL">$AAPL</a></h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="/company/show?ticker=MSFT">$MSFT</a></h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="/company/show?ticker=AMZN">$AMZN</a></h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="/company/show?ticker=FB">$FB</a></h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-            </li>
-          </ol>
-        </div>
+              <%
+                  for (Stock s : stockFollowList) {
+                    String currency = "";
+                    if (s.getCurrency().equals("USD")) {
+                      currency = "$";
+                    } else if (s.getCurrency().equals("EUR")) {
+                      currency = "€";
+                    } else if (s.getCurrency().equals("GBP")) {
+                      currency = "£";
+                    }
+              %>
+                <li>
+                  <div class="card">
+                    <div class="card-header">
+                      <h5 class="card-title"><a href="/company/show?ticker=AAPL"><%=currency%><%=s.getSymbol()%></a></h5>
+                      <p class="card-text"><%=s.getName()%></p>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-top">
+                        <%
+                          if(s.getQuote().getPrice().compareTo(s.getQuote().getPreviousClose()) > 0) {
+                        %>
+                        <p class="card-text" style="font-size:17px; color:red;"><b><%=currency%><%=s.getQuote().getPrice().subtract(s.getQuote().getPreviousClose())%> (<%=s.getQuote().getChangeInPercent()%>%)</b></p>
+                        <%
+                        } else if (s.getQuote().getPrice().compareTo(s.getQuote().getPreviousClose()) < 0) {
+                        %>
+                        <p class="card-text" style="font-size:17px; color:blue;"><b>-<%=currency%><%=s.getQuote().getPrice().subtract(s.getQuote().getPreviousClose()).abs()%> (<%=s.getQuote().getChangeInPercent()%>%)</b></p>
+                        <%
+                          }
+                        %>
+                      </div>
+                      <div class="card-bottom">
+                        <p class="card-text"><b><%=currency%><%=s.getQuote().getPrice()%></b></p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              <%
+                }
+              %>
+                <p>출처: <a href="https://finance.yahoo.com/">Yahoo Finance</a></p>
 
         <div class="p-4">
           <h4 class="fst-italic">My Service</h4>
@@ -371,11 +397,9 @@
       </div>
     </div>
   </div>
-
+  </div>
 </main>
 <%@ include file="../include/footer.jsp" %>
-
-
 
 </body>
 </html>

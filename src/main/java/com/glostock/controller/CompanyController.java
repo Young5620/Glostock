@@ -10,7 +10,13 @@ public class CompanyController {
     //로그인페이지
     @RequestMapping("/show")
     public String login() {
-        return "redirect:/company/show";
+        return "company/show";
     }
 
+    
+    //apitest
+    @RequestMapping("/apitest")
+    public String apitest() {
+        return "company/apitest";
+    }
 }
