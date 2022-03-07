@@ -106,7 +106,7 @@
     <section class="margin_height"></section>
     
 	<div class="container">
-	<form action="#" method="post">
+	<form action="portfolio_result" method="post" name="regform">
 	<h6>Portfolio&nbsp;&nbsp;
 		<select class="btn btn-outline-dark btn-sm">
 			<option selected>Create New portfolio</option>
@@ -126,25 +126,25 @@
       <th scope="col">Price</th>
       <th scope="col" style="text-align:right;">Portfolio Name</th>
       <th style="text-align:left;">
-        <input class="rounded border-0" type="text" size="15">
+        <input class="rounded border-0" type="text" size="15" name="pf_name">
       </th>
     </tr>
   </thead>
   <tbody id="tbody">
     <tr>
       <td style="text-align:center;" scope="row"><strong>1</strong></td>
-      <td><input class="rounded-3 border-1" type="text" size="10" id="ticker"></td>
+      <td><input class="rounded-3 border-1" type="text" size="10" name="ticker"></td>
       <td><select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" id="transaction">
 			<option selected>Buy</option>
   			<option value="1">Sell</option>
   			<option value="2">Reserve</option>
 		  </select>
 	  </td>
-      <td><input class="rounded-3 border-1" type="text" size="15" id="date"></td>
-      <td><input class="rounded-3 border-1" type="text" size="15" id="shares"></td>
-      <td><input class="rounded-3 border-1" type="text" size="15" id="price"></td>
-      <td style="text-align:center;"><input type="button" value="Get Today's Price" class="btn btn-outline-success btn-sm"></td>
-      <td style="text-align:center;"><input type="button" value="Clear Row" class="btn btn-outline-danger btn-sm"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="date"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="shares"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="price"></td>
+      <td style="text-align:center;"><input type="button" value="Get Today's Price" class="btn btn-outline-success btn-sm" name="today_price"></td>
+      <td style="text-align:center;"><input type="button" value="Clear Row" class="btn btn-outline-danger btn-sm" name="clear_row"></td>
     </tr>
     <tr>
       <td style="text-align:center;" scope="row"><strong>2</strong></td>
@@ -181,7 +181,7 @@
   <tr>
   <td></td>
   <td colspan="7" style="text-align: center;">
-  <input type="button" value="Save Changes" class="btn btn-outline-dark btn-sm" onclick="location.href='portfolio_result'">&nbsp;&nbsp;
+  <input type="submit" value="Save Changes" class="btn btn-outline-dark btn-sm">&nbsp;&nbsp;
   <input type="button" value="Cancel" class="btn btn-outline-dark btn-sm" onclick="location.href='feed'">&nbsp;&nbsp;
   <input type="button" value="Undo" class="btn btn-outline-dark btn-sm">&nbsp;&nbsp;
   <input type="button" value="Clear" class="btn btn-outline-dark btn-sm" onclick="location.href='portfolio'">&nbsp;&nbsp;
@@ -227,6 +227,7 @@ function ADDRow() {
     cell8.innerHTML = '<center><input type="button" value="Clear Row" class="btn btn-outline-danger btn-sm"></center>';
 	
 }
+
 </script>
 </body>
 </html>

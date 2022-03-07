@@ -81,7 +81,7 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="card">
-      <div class="card-header" style="background-color: #000; font-weight: bold; color: white;">Board Register</div>
+      <div class="card-header text-light bg-dark"><strong>Board Register</strong></div>
       <div class="card-body">
 
 
@@ -91,34 +91,39 @@
             <label>Title</label>
             <input class="form-control" name="title" id="title">
           </div>
+          <div class="text_height_10"></div>
           
           <div class="form-group">
             <label>Source</label>
             <input class="form-control" name="title" id="source">
           </div>
+          <div class="text_height_10"></div>
           
           <div class="form-group">
             <label>Tag</label>
             <input class="form-control" name="title" id="tag">
           </div>
+          <div class="text_height_10"></div>
           
           <div class="form-group">
             <label>Upload</label>
  			<input type="file" class="form-control" id="inputGroupFile">
 		  </div>
-
+		  <div class="text_height_10"></div>
+		  
           <div class="form-group">
             <label>Content</label>
             <textarea class="form-control" style="height:300px;" name="content" id="content"></textarea>
           </div>
+          <div class="text_height_10"></div>
 
           <div class="form-group">
             <label>writer</label>
             <input class="form-control" name="writer" id="writer">
           </div>
           <div class="text_height_10"></div>
-          <button type="submit" style="background-color: #000; font-weight: normal; color: white;">등록</button>
-          <button type="button" style="background-color: #000; font-weight: normal; color: white;">취소</button>
+          <button type="submit" class="btn btn-outline-dark btn-sm">등록</button>
+          <button type="button" class="btn btn-outline-dark btn-sm">취소</button>
         </form>
 <!-- 
 등록 클릭시 title, content, writer값을 검증 처리하는 스크립트

@@ -1,5 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="java.math.BigDecimal"%>
+<%@page import="yahoofinance.YahooFinance"%>
+<%@page import="yahoofinance.Stock"%>
+<%@ page import="java.util.ArrayList" %>
+<%
+  Stock TSLA = YahooFinance.get("TSLA");
+  Stock AAPL = YahooFinance.get("AAPL");
+  Stock MSFT = YahooFinance.get("MSFT");
+  Stock AMZN = YahooFinance.get("AMZN");
+  Stock FB = YahooFinance.get("FB");
+  Stock ADS = YahooFinance.get("ADS.DE");
+
+  ArrayList<Stock> stockFollowList = new ArrayList<>();
+  stockFollowList.add(TSLA);
+  stockFollowList.add(AAPL);
+  stockFollowList.add(MSFT);
+  stockFollowList.add(AMZN);
+  stockFollowList.add(FB);
+  stockFollowList.add(ADS);
+%>
 <!doctype html>
 <html lang="en">
 <head>
@@ -95,12 +115,11 @@
 </header>
 <br>
 <main>
-    
+
 	<div class="container">
-	<form action="#" method="post">
 	<h6>Portfolio&nbsp;&nbsp;
 		<select class="btn btn-outline-dark btn-sm">
-			<option selected>Create New portfolio</option>
+			<option selected>${port.pf_name}</option>
 			<option value="1">test</option>
 		</select>
 	</h6>
@@ -124,212 +143,73 @@
     </tr>
   </thead>
   <tbody>
+  <%
+    int num = 1;
+	for (Stock s : stockFollowList) {
+		
+		String currency = "";
+		if (s.getCurrency().equals("USD")) {
+			currency = "$";
+		} else if (s.getCurrency().equals("EUR")) {
+			currency = "€";
+		} else if (s.getCurrency().equals("GBP")) {
+			currency = "£";
+		}
+	
+%>
     <tr>
-      <th style="text-align:right;" scope="row">1</th>
-      <td style="font-weight: bold;">TSLA</td>
-      <td>Tesla,Inc.</td>
-      <td class="text-danger">839.29</td>
-      <c:choose>
-      <c:when test="${change.charAt[0]=='+'}">
-      <td class="text-primary" style="text-align:right;">+0.12%</td>
-      </c:when>
-      <c:otherwise>
-      <td class="text-danger" style="text-align:right;">-0.12%</td>
-      </c:otherwise>
-      </c:choose>
-      <td>22,287,340</td>
-      <td>buy</td>
-      <td>03-07-22</td>
-      <td style="text-align:right;">119</td>
-      <td>839.29</td>
-      <td style="text-align:right;">1000000.03</td>
-      <td style="text-align:right;">0.00</td>
-      <td style="text-align:right;">0.00%</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+119.29</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-119.29</td>
-      	</c:otherwise>
-      </c:choose>
+      <th style="text-align:right;" scope="row"><%=num %></th>
       
-    </tr>
-    <tr>
-      <th style="text-align:right;" scope="row">2</th>
-      <td style="font-weight: bold;">AAPL</td>
-      <td>Apple Inc.</td>
-      <td class="text-danger">163.17</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+1.84%</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-1.84%</td>
-      	</c:otherwise>
-      </c:choose>
+      <td style="font-weight: bold;"><%=currency%><%=s.getSymbol()%></td>
       
-      <td>83,654,856</td>
-      <td>buy</td>
-      <td>03-07-22</td>
-      <td style="text-align:right;">110</td>
-      <td>163.17</td>
-      <td style="text-align:right;">17948.70</td>
-      <td style="text-align:right;">0.00</td>
-      <td style="text-align:right;">0.00%</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+336.60</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-336.60</td>
-      	</c:otherwise>
-      </c:choose>
-    </tr>
-    <tr>
-      <th style="text-align:right;" scope="row">3</th>
-      <td style="font-weight: bold;">MSFT</td>
-      <td>Microsft Corporation</td>
-      <td class="text-danger">289.86</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+1.84%</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-2.05%</td>
-      	</c:otherwise>
-      </c:choose>
+      <td><%=s.getName()%></td>
       
-      <td>83,654,856</td>
-      <td>buy</td>
-      <td>03-07-22</td>
-      <td style="text-align:right;">110</td>
-      <td>163.17</td>
-      <td style="text-align:right;">17948.70</td>
-      <td style="text-align:right;">0.00</td>
-      <td style="text-align:right;">0.00%</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+336.60</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-336.60</td>
-      	</c:otherwise>
-      </c:choose>
-    </tr>
-    <tr>
-      <th style="text-align:right;" scope="row">4</th>
-      <td style="font-weight: bold;">AMZN</td>
-      <td>Amazon.com, Inc</td>
-      <td class="text-danger">2912.82</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+1.84%</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-1.53%</td>
-      	</c:otherwise>
-      </c:choose>
+      <td class="text-danger"><%=currency%><%=s.getQuote().getPrice()%></td>
       
-      <td>83,654,856</td>
-      <td>buy</td>
-      <td>03-07-22</td>
-      <td style="text-align:right;">110</td>
-      <td>163.17</td>
-      <td style="text-align:right;">17948.70</td>
-      <td style="text-align:right;">0.00</td>
-      <td style="text-align:right;">0.00%</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+336.60</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-336.60</td>
-      	</c:otherwise>
-      </c:choose>
-    </tr>
-    <tr>
-      <th style="text-align:right;" scope="row">5</th>
-      <td style="font-weight: bold;">FB</td>
-      <td>Meta Platforms, Inc</td>
-      <td class="text-danger">200.06</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+1.84%</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-1.43%</td>
-      	</c:otherwise>
-      </c:choose>
+      <% if(s.getQuote().getPrice().compareTo(s.getQuote().getPreviousClose()) > 0) { %>
+      <td class="text-danger" style="text-align:right;"><%=s.getQuote().getChangeInPercent()%></td>
+      <% } else if (s.getQuote().getPrice().compareTo(s.getQuote().getPreviousClose()) < 0) {%>
+      <td class="text-primary" style="text-align:right;"><%=s.getQuote().getChangeInPercent()%></td>
+      <% } %>     
       
-      <td>83,654,856</td>
-      <td>buy</td>
-      <td>03-07-22</td>
-      <td style="text-align:right;">110</td>
-      <td>163.17</td>
-      <td style="text-align:right;">17948.70</td>
-      <td style="text-align:right;">0.00</td>
-      <td style="text-align:right;">0.00%</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+336.60</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-336.60</td>
-      	</c:otherwise>
-      </c:choose>
-    </tr>
-    <tr>
-      <th style="text-align:right;" scope="row">6</th>
-      <td style="font-weight: bold;">ADS.DE</td>
-      <td>adidas AG</td>
-      <td class="text-danger">€187.0</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+1.84%</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-6.64%</td>
-      	</c:otherwise>
-      </c:choose>
+      <td><%=s.getQuote().getVolume() %></td>
       
-      <td>83,654,856</td>
       <td>buy</td>
+      
       <td>03-07-22</td>
-      <td style="text-align:right;">110</td>
-      <td>163.17</td>
-      <td style="text-align:right;">17948.70</td>
-      <td style="text-align:right;">0.00</td>
-      <td style="text-align:right;">0.00%</td>
-      <c:choose>
-      	<c:when test="${change.charAt[0]=='+'}">
-      		<td class="text-primary" style="text-align:right;">+336.60</td>
-      	</c:when>
-      	<c:otherwise>
-      		<td class="text-danger" style="text-align:right;">-336.60</td>
-      	</c:otherwise>
-      </c:choose>
+      
+      <td style="text-align:right;">100</td>
+      
+      <td><%=s.getQuote().getPrice()%></td>
+      <td style="text-align:right;"><%=s.getQuote().getDayHigh() %></td>
+      
+      <% if(s.getQuote().getPrice().compareTo(s.getQuote().getPreviousClose()) > 0) { %>
+      <td class="text-danger" style="text-align:right;"><%=s.getQuote().getPrice().subtract(s.getQuote().getChange())%></td>
+      <td class="text-danger" style="text-align:right;"><%=s.getQuote().getPrice().subtract(s.getQuote().getPreviousClose())%></td>
+      <td class="text-danger" style="text-align:right;"><%=s.getQuote().getPrice().subtract(s.getQuote().getPreviousClose()).abs()%></td>
+      <% } else if(s.getQuote().getPrice().compareTo(s.getQuote().getPreviousClose()) < 0) { %>
+      <td class="text-primary" style="text-align:right;"><%=s.getQuote().getPrice().subtract(s.getQuote().getChange())%></td>
+      <td class="text-primary" style="text-align:right;"><%=s.getQuote().getPrice().subtract(s.getQuote().getPreviousClose())%></td>
+      <td class="text-primary" style="text-align:right;"><%=s.getQuote().getPrice().subtract(s.getQuote().getPreviousClose()).abs()%></td>
+      <%} %>
     </tr>
+    <%num++;}%>
   </tbody>
   <tfoot>
   <tr>
   <td colspan="2" style="text-align:center; font-weight: bold;">Total</td>
   
-  <td colspan="2" style="font-weight: bold;">6 Stocks</td>
-  <c:choose>
-      <c:when test="${change.charAt[0]=='+'}">
-      <td class="text-primary" style="font-weight: bold; text-align: right;">+%</td>
-      </c:when>
-      <c:otherwise>
-      <td class="text-danger" style="font-weight: bold; text-align: right;">-0.39%</td>
-      </c:otherwise>
-  </c:choose>
+  <td colspan="2" style="font-weight: bold;"><%=num-1 %> Stocks</td>
   
+  <td class="text-danger" style="font-weight: bold; text-align: right;">
+  +0.00%
+  </td>
   <td colspan="5"></td>
   
   <td style="text-align:right;">117948.73</td>
   <td style="text-align:right;">0.00</td>
   <td style="text-align:right;">0.00</td>
+  <!-- 
   <c:choose>
       <c:when test="${change.charAt[0]=='+'}">
       <td class="text-primary" style="text-align:right;">+</td>
@@ -338,16 +218,19 @@
       <td class="text-danger" style="text-align:right; font-weight: bold;">-455.89</td>
       </c:otherwise>
   </c:choose>
-  
+   -->
+   <td class="text-danger" style="text-align:right; font-weight: bold;">-455.89</td>
   </tr>
+  
   </tfoot>
 </table>
-</form>
+
 <div align="right">
 <button class="btn btn-outline-dark" onclick="location.href='portfolio'">Back</button>
+<button class="btn btn-outline-dark" onclick="location.href='delete?pf_name=${port.pf_name}'">Delete</button>
 <button class="btn btn-outline-dark" onclick="location.href='feed'">My Feed</button>
 <button class="btn btn-outline-dark" onclick="location.href='service'">My Service</button>
-</div>	
+</div>
 	</div>
 <section class="margin_height"></section>
 </main>
