@@ -110,10 +110,10 @@
       <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/user/feed">My Feed</a>
+            <a class="nav-link active" href="/user/feed">My Feed</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/user/follow">My Following</a>

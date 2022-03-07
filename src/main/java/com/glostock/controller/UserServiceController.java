@@ -60,6 +60,9 @@ public class UserServiceController {
 		
 	} 
 	
-
+	@RequestMapping("/portfolio_result")
+	public String portfolio_result() {
+		return "user/portfolio_result";
+	}
 
 }
