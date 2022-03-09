@@ -15,34 +15,31 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521/XEPDB1"></property>
-		<property name="username" value="spring"></property>
-		<property name="password" value="spring"></property>	
+		<property name="username" value="glostock"></property>
+		<property name="password" value="glostock"></property>
 	</bean>
 		
 	<!-- DataSource설정  -->
-	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
 		<constructor-arg ref="hikariConfig"></constructor-arg>
 	</bean>
 	
 	<!-- jdbcTemplate 사용, Hikari ds를 참조하는 bean생성-->
 	<!-- jdbcTemplate 이름으로 객체를 생성하면서 의존주입(HikariCP설정으로 생성된 ds) -->
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="ds"> </property>
-	</bean>
+	<!-- <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean> -->
 	
 	<!--MyBatis의 핵심객체 SQL sessioneFactory추가 -->
 	<!--세션팩토리는 내부적으로 DB와 연결해주고, pstmt의 SQL문 바인딩 처리,
 	반복적인 close() 작업 또한 처리하여 개발자의 코드량을 줄여 효율적 작업도모
 	-->
-	<!--  
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name= "dataSource" ref="ds"></property>
-		<property name= "mapperLocations" value="classpath:com/glostock/mapper/**/*.xml"></property>
+		<property name= "dataSource" ref="dataSource"></property>
 	</bean>
-	-->
-
+	
 	<!--MyBatis의 매퍼패키지를 생성하고 스캔 -->
-	<!--  <mybatis-spring:scan base-package="com.glostock.mapper"/>-->
+	<mybatis-spring:scan base-package="com.glostock.mapper"/>
 	
 
 		

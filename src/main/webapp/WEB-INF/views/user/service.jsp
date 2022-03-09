@@ -1,7 +1,14 @@
+<%@page import="com.glostock.command.CalVO"%>
+<%@page import="org.springframework.ui.Model"%>
+<%@page import="java.lang.reflect.Array"%>
+<%@page import="java.util.List"%>
 <%@ page import="yahoofinance.Stock" %>
 <%@ page import="yahoofinance.YahooFinance" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <%
     Stock TSLA = YahooFinance.get("TSLA");
@@ -108,7 +115,7 @@
                 <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" href="/user/feed">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/user/feed">Feed</a>
@@ -120,10 +127,13 @@
                             <a class="nav-link" href="/user/crypto">Cryptocurrency</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/user/portfolio">My Tools</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/user/portfolio">My Portfolio</a>
                         </li>
                     </ul>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-outline-secondary" href="#">My Account</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-outline-secondary" href="/user/mypage">My Account</a>
                 </div>
             </div>
         </nav>
@@ -141,97 +151,367 @@
                 <b>Glo 툴즈</b>
             </h3>
 
-         
-
-       
-       
  <div class="accordion" id="accordionExample">
  
  
-  <div class="accordion-item">
+  <div class="accordion-item" id="first">
     <h4 class="accordion-header" id="headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
         <h5><img src="/resources/img/calculator.svg" style="width:20px; height:20px;"> <b>공모주청약 계산기(비례배정)</b></h5>
       </button>
     </h4>
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-      
       <h6>
       <b>☞</b>아래의 계산기로 예상 배정주 확인이 가능합니다 (비례배정만 지원) <br><br>
       <b>☞</b>공모가 대비 입금금액,증거금,경쟁률에 따라 차이가 배정주식 수에 차이가 발생하며, <br>
       증권사의 배정정책에 따라 계산이 상이할 수 있습니다. <br><br>
-      <p><a href="http://www.38.co.kr/html/fund/?o=k"><b>☞</b>공모주 청약일정 확인하기</a> </p>
+      <p><a href="http://www.38.co.kr/html/fund/?o=k"><b>☞</b>공모주 청약일정 확인하기</a></p>
       
       </h6>
       
-      <form> 
+      <form action="ipoForm" method="post"> 
       	<table> 
-      	
       	<tr>
       	<td><b>입금금액(원):</b> </td>
-      	<td><input type="text" id="deposit" value=""> </td>   
+      	<td><input type="text" id='deposit' name='deposit'> </td>   
       	</tr>
-      	
       	<tr>
       	<td><b>증거금비율(%):</b></td>
-      	<td><input type="text" id="initialmargin" value=""> </td>   
+      	<td><input type="text" id='initialmargin' name='initialmargin' > </td>   
       	</tr>
-      	
       	<tr>
       	<td><b>공모가(원):</b></td>
-      	<td> <input type="text" id="ipoprice" value=""> </td>   
+      	<td> <input type="text" id='ipoprice' name='ipoprice'> </td>   
       	</tr>
-      	
       	<tr>
       	<td><b>경쟁률:</b></td>
-      	<td><input type="text" id= "comprate" value="">&nbsp;:1 </td>   
+      	<td><input type="text" id='comprate' name='comprate'>&nbsp; :1 </td>   
       	</tr>
-  	
      </table>
-     <br>
-     <input type="submit" onclick='ipo()'> &nbsp;
+    <br>
+     <input type="submit" id="ipoForm" value="계산하기">
      <button type="reset">다시입력</button> 
       </form> 
+      <br> 
+      <div class="card hide" >
+ 	 <div class="card-body">
+ 	 	당신의 청약예상 배정주는 약 <b>  <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${ipoForm.deposit/(ipoForm.initialmargin*0.01)/ipoForm.comprate/ipoForm.ipoprice}" /></b>(주)입니다. <br>
+ 	 	인정금액은 <b> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${ipoForm.deposit/(ipoForm.initialmargin*0.01)}" /></b> (원)입니다. <br>
+  	</div>
+	</div>
+    <div class="card hide" >
+ 	 <div class="card-body" align="center">
+ 	 	<% 
+ 	 	ArrayList<String> complist = new ArrayList<String>(); 
+ 	 	complist.add("1");
+ 	 	complist.add("10"); 
+ 	 	complist.add("25"); 
+ 	 	complist.add("50"); 
+ 	 	complist.add("100"); 
+ 	 	complist.add("250"); 
+ 	 	complist.add("500");
+ 		complist.add("1000");
+
+ 	 	%>
+ 	 	<c:set var="complist" value="<%=complist %>"/>
+
+
+
+ 	 	<table width="500" border= "1">
+ 	 	<tr>
+ 	 	<th>경쟁률</th> 
+ 	 	<th>예상배정주</th>
+ 	 	</tr>
+ 	 	<c:forEach var="i" begin="0" end="7">
+ 	 	      
+	<tr> 
+ 	 	<th>${complist[i]} :1</th>
+ 	 	<th> 
+		 <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${ipoForm.deposit/(ipoForm.initialmargin*0.01)/ipoForm.ipoprice/complist[i]}" />주
+		<br>
+		 </th>
+		 </tr>
+
+ 
+		
+		</c:forEach>
+
+ 	 	</table> 
+
+  	</div>
+	</div>
+
+
+  <br><br>    
+
       </div>
     </div>
   </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  <div class="accordion-item">
+
+
+  <div class="accordion-item"  id="second">
     <h2 class="accordion-header" id="headingTwo">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Accordion Item #2
+   <h5><img src="/resources/img/calculator.svg" style="width:20px; height:20px;"> <b>배당수익률 계산기</b></h5>
       </button>
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      
+         <form action="divForm" method="post"> 
+      	<table> 
+    
+      	<tr>
+      	<td><b>주당배당금(원):</b> </td>
+      	<td><input type="text" id='divpershare' name='divpershare'> </td>   
+      	</tr>
+ 
+      	<tr>
+      	<td><b>주가(원):</b></td>
+      	<td><input type="text" id='stockprice' name='stockprice' > </td>   
+      	</tr>
+      	
+      	<tr>
+      	<td><b>배당주기(단위):</b></td>
+      	<td>   <select class="form-select" id='unit' name='unit' required>
+     	 <option selected disabled value="">선택하세요</option> 
+    	  <option value="12">월</option>
+    	  <option value="4">분기</option>
+    	   <option value="2">반기</option>
+    	    <option value="1">년</option>
+   		 </select> </td>   
+      	</tr>
+      	
+      	<tr>
+      	<td><b>보유주식수(주):</b></td>
+      	<td><input type="text" id='holdings' name='holdings'>&nbsp; </td>   
+      	</tr>
+    
+     </table>
+    <br>
+     <input type="submit" id="divForm" value="계산하기">
+     <button type="reset">다시입력</button> 
+    
+      </form>    
+      <br>
+      <div class="card hide" >
+ 	 <div class="card-body">
+ 	 	
+ 	 	<b>${divForm.stockprice}</b>원에 <b>${divForm.holdings}</b>주를 매입하여 <b>${(divForm.holdings*divForm.divpershare)}</b>의 배당금을 받았을 경우, <br>
+ 	 	1회 배당수익률: 약 <b><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.divpershare/divForm.stockprice*100}" /></b>% <br> 
+ 	 	연 배당수익률: 약 <b><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.divpershare/divForm.stockprice*100*divForm.unit}" /></b> %<br>
+  	</div>
+	</div>
+
+
+
+           <div class="card hide" >
+ 	 <div class="card-body">
+      매년 연 배당 수익률 <b>  <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.divpershare/divForm.stockprice*100*divForm.unit}" /></b>%의 배당금을 수령한다면? <br>
+		<br>
+      	<table width="500" border= "1">
+ 	 	<tr>
+ 	 	<th>기간(년)</th> 
+ 	 	<th>투자원금(원)</th>
+ 	 	<th>평가금액(원)</th>
+ 	 	</tr>
+ 	 	
+ 	 	<tr> 
+ 	 	<th>1년</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings}" /> 원</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)}" /> 원</th>
+ 	 	</tr>
+
+ 	 <tr> 
+ 	 	<th>2년</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)}" /> 원</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)}" /> 원</th>
+ 	 	</tr>
+
+		<tr> 
+ 	 	<th>3년</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)}" /> 원</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)}" /> 원</th>
+ 	 	</tr>
+ 	 	
+ 	 <tr> 
+ 	 	<th>4년</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)}" /> 원</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)}" /> 원</th>
+ 	 	</tr>
+ 	 	
+ 	 	<tr> 
+ 	 	<th>5년</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)}" /> 원</th>
+ 	 	<th> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${divForm.stockprice*divForm.holdings*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)*((divForm.divpershare/divForm.stockprice*100*divForm.unit)/100+1)}" /> 원</th>
+ 	 	</tr>
+ 	 	
+
+
+
+		
+		</table>
+      
+      
+      	</div>
+	</div>
+      
+      
+      
+      
+      
+      
       </div>
     </div>
   </div>
-  <div class="accordion-item">
+  
+  
+  
+  
+  
+  <div class="accordion-item"  id="third">
     <h2 class="accordion-header" id="headingThree">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        Accordion Item #3
+      <h5><img src="/resources/img/calculator.svg" style="width:20px; height:20px;"> <b>복리계산기</b></h5>
       </button>
     </h2>
     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      
+      
+       <form action="compoundForm" method="post"> 
+      	<table> 
+    
+      	<tr>
+      	<td><b>원금(원):</b> </td>
+      	<td><input type="text" id='seed' name='seed'> </td>   
+      	</tr>
+ 
+      	<tr>
+      	<td><b>수익률(%):</b></td>
+      	<td><input type="text" id='profit' name='profit' > </td>   
+      	</tr>
+      	
+      	
+      	<tr>
+      	<td><b>단위(월/년):</b></td>
+      	<td>
+      	  <select class="form-select" id="unit" required>
+     	 <option selected disabled value="">선택하세요</option> 
+    	  <option value="12">월</option>
+    	  <option value="1">년</option>
+   		 </select>
+    	  	
+       </td>   
+      	</tr>
+    
+     </table>
+    <br>
+     <input type="submit" id="divForm" value="계산하기">
+     <button type="reset">다시입력</button> 
+    
+      </form>    
+ <br>
+
+
+   <div class="card hide" >
+ 	 <div class="card-body">
+ 	 	
+ 	 	원금 <b>${compoundForm.seed}</b>을 <b>5년</b>간 매년 <b>${compundForm.profit}</b>의 수익률을 달성하였다면? <br>	
+ 	 	최종금액:<b> <fmt:formatNumber type="number" pattern="###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1) *((compoundForm.profit/100)+1) *((compoundForm.profit/100)+1) *((compoundForm.profit/100)+1)}" /></b>원
+ 	 	<br> 
+ 	 	최종수익률:<b> <fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${(compoundForm.seed*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1) *((compoundForm.profit/100)+1) *((compoundForm.profit/100)+1) *((compoundForm.profit/100)+1)-compoundForm.seed)/compoundForm.seed*100}" />%</b>
+ 	 	
+ 	 
+
+  	</div>
+	</div>
+
+
+     <div class="card hide" >
+ 	 <div class="card-body">
+ 
+		<br>
+      	<table width="500" border= "1">
+ 	 	<tr>
+ 	 	<th>기간(년)</th> 
+ 	 	<th>원금(원)</th>
+ 	 	<th>결과(원)</th>
+ 	 	</tr>
+
+
+ 	 	<tr> 
+ 	 	<th>1년</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed}" />원</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)}" />원</th>
+ 	 	</tr>
+
+ 	 		<tr> 
+ 	 	<th>2년</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)}" />원</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)}" />원</th>
+ 	 	</tr>
+
+			<tr> 
+ 	 	<th>3년</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)}" />원</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)}" />원</th>
+ 	 	</tr>
+ 	 	
+ 	 		<tr> 
+ 	 	<th>4년</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)}" />원</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)}" />원</th>
+ 	 	</tr>
+ 	 	
+ 	 	<tr> 
+ 	 	<th>5년</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)}" />원</th>
+ 	 	<th><fmt:formatNumber type="number" pattern="###,###,###,###,###,###" value="${compoundForm.seed*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)*((compoundForm.profit/100)+1)}" />원</th>
+ 	 	</tr>
+ 	 	
+
+
+
+		
+		</table>
+      
+      
+      	</div>
+	</div>
+
+
+
+
+
+
       </div>
     </div>
+
+ 
+
+
+
+
+    
   </div>
+
+
+
+
+
+
+
+
+  
 </div>
        
        
-       
+      <br>
+      <br> 
+      <br>
+      <br> 
        
        
        

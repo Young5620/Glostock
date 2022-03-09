@@ -28,14 +28,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Hugo 0.88.1">
   <title>My Feed | Glo Stock</title>
 
   <!-- Bootstrap core CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <meta name="theme-color" content="#7952b3">
-
 
   <style>
     .blog-post {
@@ -110,22 +107,25 @@
       <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Home</a>
+            <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/user/feed">My Feed</a>
+            <a class="nav-link active" aria-current="page" href="/user/feed">Feed</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/user/follow">My Following</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/user/service">My Service</a>
+            <a class="nav-link" href="/user/crypto">Cryptocurrency</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/service">My Tools</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/user/portfolio">My Portfolio</a>
           </li>
         </ul>
-         &nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-outline-secondary" href="#">My Account</a>
+         &nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-sm btn-outline-secondary" href="/user/mypage">My Account</a>
       </div>
     </div>
   </nav>
@@ -181,7 +181,7 @@
   <div class="row g-5">
     <div class="col-md-8">
       <div style="float:right;">
-      <a class="btn btn-outline-light" href="write" style="color: #000;"><strong>Regist</strong></a>
+      <a class="btn btn-outline-light" href="write" style="color: #000;"><strong>글쓰기</strong></a>
       </div>
       <h3 class="pb-4 mb-4 fst-italic border-bottom">
         My Feed
@@ -358,7 +358,7 @@
                 <li>
                   <div class="card">
                     <div class="card-header">
-                      <h5 class="card-title"><a href="/company/show?ticker=AAPL"><%=currency%><%=s.getSymbol()%></a></h5>
+                      <h5 class="card-title"><a href="/company/show?ticker=<%=s.getSymbol()%>"><%=currency%><%=s.getSymbol()%></a></h5>
                       <p class="card-text"><%=s.getName()%></p>
                     </div>
                     <div class="card-body">

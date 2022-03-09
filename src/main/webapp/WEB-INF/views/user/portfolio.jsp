@@ -106,13 +106,10 @@
     <section class="margin_height"></section>
     
 	<div class="container">
-	<form action="portfolio_result" method="post" name="regform">
+	<form action="portfolio_insert" method="post" name="regform">
 	<h6>Portfolio&nbsp;&nbsp;
 		<select class="btn btn-outline-dark btn-sm">
 			<option selected>Create New portfolio</option>
-			<option value="1">test1</option>
-			<option value="2">test2</option>
-			<option value="3">test3</option>
 		</select>
 	</h6>
 	<table class="table border border-light border-3">
@@ -126,7 +123,7 @@
       <th scope="col">Price</th>
       <th scope="col" style="text-align:right;">Portfolio Name</th>
       <th style="text-align:left;">
-        <input class="rounded border-0" type="text" size="15" name="pf_name">
+        <input class="rounded border-0" type="text" size="15" name="pfname">
       </th>
     </tr>
   </thead>
@@ -148,31 +145,61 @@
     </tr>
     <tr>
       <td style="text-align:center;" scope="row"><strong>2</strong></td>
-      <td><input class="rounded-3 border-1" type="text" size="10" id="ticker"></td>
-      <td><select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" id="transaction">
+      <td><input class="rounded-3 border-1" type="text" size="10" name="ticker"></td>
+      <td><select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" name="transaction">
 			<option selected>Buy</option>
   			<option value="1">Sell</option>
   			<option value="2">Reserve</option>
 		  </select>
 	  </td>
-      <td><input class="rounded-3 border-1" type="text" size="15" id="date"></td>
-      <td><input class="rounded-3 border-1" type="text" size="15" id="shares"></td>
-      <td><input class="rounded-3 border-1" type="text" size="15" id="price"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="date"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="shares"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="price"></td>
       <td style="text-align:center;"><input type="button" value="Get Today's Price" class="btn btn-outline-success btn-sm"></td>
       <td style="text-align:center;"><input type="button" value="Clear Row" class="btn btn-outline-danger btn-sm"></td>
     </tr>
     <tr>
       <td style="text-align:center;" scope="row"><strong>3</strong></td>
-      <td><input class="rounded-3 border-1" type="text" size="10" id="ticker"></td>
-      <td><select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" id="transaction">
+      <td><input class="rounded-3 border-1" type="text" size="10" name="ticker"></td>
+      <td><select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" name="transaction">
 			<option selected>Buy</option>
   			<option value="1">Sell</option>
   			<option value="2">Reserve</option>
 		  </select>
 	  </td>
-      <td><input class="rounded-3 border-1" type="text" size="15" id="date"></td>
-      <td><input class="rounded-3 border-1" type="text" size="15" id="shares"></td>
-      <td><input class="rounded-3 border-1" type="text" size="15" id="price"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="date"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="shares"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="price"></td>
+      <td style="text-align:center;"><input type="button" value="Get Today's Price" class="btn btn-outline-success btn-sm"></td>
+      <td style="text-align:center;"><input type="button" value="Clear Row" class="btn btn-outline-danger btn-sm"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;" scope="row"><strong>4</strong></td>
+      <td><input class="rounded-3 border-1" type="text" size="10" name="ticker"></td>
+      <td><select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" name="transaction">
+			<option selected>Buy</option>
+  			<option value="1">Sell</option>
+  			<option value="2">Reserve</option>
+		  </select>
+	  </td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="date"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="shares"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="price"></td>
+      <td style="text-align:center;"><input type="button" value="Get Today's Price" class="btn btn-outline-success btn-sm"></td>
+      <td style="text-align:center;"><input type="button" value="Clear Row" class="btn btn-outline-danger btn-sm"></td>
+    </tr>
+    <tr>
+      <td style="text-align:center;" scope="row"><strong>5</strong></td>
+      <td><input class="rounded-3 border-1" type="text" size="10" name="ticker"></td>
+      <td><select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" name="transaction">
+			<option selected>Buy</option>
+  			<option value="1">Sell</option>
+  			<option value="2">Reserve</option>
+		  </select>
+	  </td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="date"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="shares"></td>
+      <td><input class="rounded-3 border-1" type="text" size="15" name="price"></td>
       <td style="text-align:center;"><input type="button" value="Get Today's Price" class="btn btn-outline-success btn-sm"></td>
       <td style="text-align:center;"><input type="button" value="Clear Row" class="btn btn-outline-danger btn-sm"></td>
     </tr>
@@ -181,6 +208,7 @@
   <tr>
   <td></td>
   <td colspan="7" style="text-align: center;">
+  <input class="rounded-3 border-1" type="text" size="15" name="nickname">
   <input type="submit" value="Save Changes" class="btn btn-outline-dark btn-sm">&nbsp;&nbsp;
   <input type="button" value="Cancel" class="btn btn-outline-dark btn-sm" onclick="location.href='feed'">&nbsp;&nbsp;
   <input type="button" value="Undo" class="btn btn-outline-dark btn-sm">&nbsp;&nbsp;
@@ -201,7 +229,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
-var count = 4;
+var count = 6;
 function ADDRow() {
 	
 	var my_tbody = document.getElementById('tbody');
@@ -215,14 +243,13 @@ function ADDRow() {
     var cell7 = row.insertCell(6);
     var cell8 = row.insertCell(7);
     
-    
     cell1.innerHTML = '<center><strong>'+count+'<strong></center>';
     count++;
-    cell2.innerHTML = '<input class="rounded-3 border-1" type="text" size="10" id="ticker">';
-    cell3.innerHTML = '<select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" id="transaction"><option selected>Buy</option><option value="1">Sell</option><option value="2">Reserve</option></select>';
-    cell4.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" id="date">';
-    cell5.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" id="shares">';
-    cell6.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" id="price">';
+    cell2.innerHTML = '<input class="rounded-3 border-1" type="text" size="10" name="ticker">';
+    cell3.innerHTML = '<select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" name="transaction"><option selected>Buy</option><option value="1">Sell</option><option value="2">Reserve</option></select>';
+    cell4.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" name="date">';
+    cell5.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" name="shares">';
+    cell6.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" name="price">';
     cell7.innerHTML = "<center><input type='button' value=\"Get Today's Price\" class='btn btn-outline-success btn-sm'></center>";
     cell8.innerHTML = '<center><input type="button" value="Clear Row" class="btn btn-outline-danger btn-sm"></center>';
 	

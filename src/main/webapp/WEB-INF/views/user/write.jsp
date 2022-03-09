@@ -94,22 +94,10 @@
           <div class="text_height_10"></div>
           
           <div class="form-group">
-            <label>Source</label>
-            <input class="form-control" name="title" id="source">
-          </div>
-          <div class="text_height_10"></div>
-          
-          <div class="form-group">
-            <label>Tag</label>
+            <label>Ticker</label>
             <input class="form-control" name="title" id="tag">
           </div>
           <div class="text_height_10"></div>
-          
-          <div class="form-group">
-            <label>Upload</label>
- 			<input type="file" class="form-control" id="inputGroupFile">
-		  </div>
-		  <div class="text_height_10"></div>
 		  
           <div class="form-group">
             <label>Content</label>

@@ -1,32 +1,45 @@
+<%@ page import="com.glostock.model.StockVO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.glostock.apiservice.PolygonAPIService" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    ArrayList<StockVO> followList = new ArrayList<>();
+
+    ArrayList<StockVO> discoverList = null;
+    try {
+        discoverList = PolygonAPIService.getFollowList();
+    } catch (NullPointerException e) {
+        discoverList = new ArrayList<>();
+    }
+
+%>
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
     <title>My Following | Glo Stock</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <meta name="theme-color" content="#7952b3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+
 
 
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
         @media (min-width: 768px) {
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
         }
+
+
 
         .follow-card {
             flex-direction: row !important;
@@ -37,19 +50,53 @@
             background-color: white !important;
             border-bottom: 0px !important;
             margin: auto;
+            text-align: center;
         }
 
         .card-title {
             border: 0;
         }
 
+        .card-body img {
+            height: 30px;
+        }
+
         .card-footer {
             border: 0 !important;
             background-color: white !important;
+            margin: auto;
+        }
+
+        .discover-card-header {
+            width: 25%;
+            font-family: Rubik, sans-serif;
+            font-weight: bold;
+        }
+
+        .discover-card-body-main {
+            width: 25%;
+            text-align: center;
+            margin: auto;
+            font-family: Rubik, sans-serif;
+        }
+
+        .discover-card-body {
+            text-align: center;
+            margin: auto;
+            font-family: Rubik, sans-serif;
+        }
+
+        .discover-card-footer {
+            width: 10%;
+            font-family: Rubik, sans-serif;
+        }
+
+        .discover-title {
+            font-family: Rubik, sans-serif;
+            font-weight: bold;
         }
 
     </style>
-
 
 </head>
 <body>
@@ -69,19 +116,23 @@
                             <a class="nav-link" href="/user/feed">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/feed">My Feed</a>
+                            <a class="nav-link" href="/user/feed">Feed</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/user/follow">My Following</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/service">My Service</a>
+                            <a class="nav-link" href="/user/crypto">Cryptocurrency</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/service">My Tools</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/user/portfolio">My Portfolio</a>
                         </li>
+
                     </ul>
-                    <a class="btn btn-sm btn-outline-secondary" href="#">My Account</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/user/mypage">My Account</a>
                 </div>
             </div>
         </nav>
@@ -103,9 +154,33 @@
         <div class="container">
             <div class="row row-cols-1">
 
+                <%
+                    for (StockVO followVO : followList) {
+                %>
+                <div class="card follow-card">
+                    <div class="card-header">
+                        <h5 class="card-title"><%=followVO.getName()%></h5>
+                        <h6 class="card-title">$<%=followVO.getTicker()%></h6>
+                    </div>
+                    <div class="card-body">
+                        <img src="<%=followVO.getLogo_url() + "?apiKey=Q2mEmcBtNaeo2pmA5WgKU0h7rVYvFrJY"%>" alt="logo">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Curr. Price: $<%=followVO.getCurrent_price()%> · Prev. Close: $<%=followVO.getPrev_close_price()%> · Delta: $<%=followVO.getChange_in_percentage()%></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-outline-success">회사 프로필</a>
+                    </div>
+                </div>
+                <%
+                    }
+                %>
+
+
                 <div class="card follow-card">
                     <div class="card-header">
                         <h5 class="card-title">$TSLA</h5>
+                        <img src="" alt="logo">
                     </div>
                     <div class="card-body">
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -156,30 +231,31 @@
         <div class="container">
             <div class="row row-cols-1">
 
-                <div class="card" style="margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
+                <%
+                    for (StockVO discoverVO : discoverList) {
+                        %>
+                            <div class="card follow-card text-white bg-dark">
+                                <div class="card-header discover-card-header text-white bg-dark">
+                                    <h5 class="card-title discover-title"><%=discoverVO.getName()%></h5>
+                                    <h6 class="card-title discover-title">$<%=discoverVO.getTicker()%></h6>
+                                </div>
+                                <div class="card-body discover-card-body">
+                                    <img src="<%=discoverVO.getLogo_url() + "?apiKey=Q2mEmcBtNaeo2pmA5WgKU0h7rVYvFrJY"%>" alt="logo">
+                                </div>
+                                <div class="card-body discover-card-body-main">
+                                    <p class="card-text">Curr. Price: $<%=discoverVO.getCurrent_price()%> · Prev. Close: $<%=discoverVO.getPrev_close_price()%> · Delta: $<%=discoverVO.getChange_in_percentage()%></p>
+                                </div>
+                                <div class="card-footer discover-card-footer text-white bg-dark">
+                                    <a href="#" class="btn btn-outline-success">Follow</a>
+                                </div>
+                            </div>
+                        <%
+                    }
+                %>
 
-                <div class="card" style="margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="button">더 보기</button>
             </div>
         </div>
     </div>

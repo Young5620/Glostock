@@ -19,8 +19,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
     <title>Cryptocurrency | Glo Stock</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -98,16 +96,19 @@
                             <a class="nav-link" href="/user/feed">Feed</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/user/follow">My Following</a>
+                            <a class="nav-link" href="/user/follow">My Following</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/service">My Service</a>
+                            <a class="nav-link active" aria-current="page" href="/user/crypto">Cryptocurrency</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/crypto">Cryptocurrency</a>
+                            <a class="nav-link" href="/user/service">My Tools</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/portfolio">My Portfolio</a>
                         </li>
                     </ul>
-                    <a class="btn btn-sm btn-outline-secondary" href="#">My Account</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="/user/mypage">My Account</a>
                 </div>
             </div>
         </nav>

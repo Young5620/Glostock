@@ -3,9 +3,10 @@ package com.glostock.command;
 import java.security.Timestamp;
 
 public class PortfolioVO {
-	private String pf_name;
-	private int num;
+	private String pfname;
+	private int pfnum;	
 	private String ticker;
+	private String nickname;
 	private String transaction;
 	private Timestamp date; 
 	private String shares;
@@ -13,32 +14,33 @@ public class PortfolioVO {
 	
 	public PortfolioVO() {}
 
-	public PortfolioVO(String pf_name, int num, String ticker, String transaction, Timestamp date, String shares,
-			String price) {
+	public PortfolioVO(String pfname, int pfnum, String ticker, String nickname, String transaction, Timestamp date,
+			String shares, String price) {
 		super();
-		this.pf_name = pf_name;
-		this.num = num;
+		this.pfname = pfname;
+		this.pfnum = pfnum;
 		this.ticker = ticker;
+		this.nickname = nickname;
 		this.transaction = transaction;
 		this.date = date;
 		this.shares = shares;
 		this.price = price;
 	}
 
-	public String getPf_name() {
-		return pf_name;
+	public String getPfname() {
+		return pfname;
 	}
 
-	public void setPf_name(String pf_name) {
-		this.pf_name = pf_name;
+	public void setPfname(String pfname) {
+		this.pfname = pfname;
 	}
 
-	public int getNum() {
-		return num;
+	public int getPfnum() {
+		return pfnum;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+	public void setPfnum(int pfnum) {
+		this.pfnum = pfnum;
 	}
 
 	public String getTicker() {
@@ -47,6 +49,14 @@ public class PortfolioVO {
 
 	public void setTicker(String ticker) {
 		this.ticker = ticker;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getTransaction() {
@@ -80,5 +90,6 @@ public class PortfolioVO {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+	
 	
 }
