@@ -1,6 +1,6 @@
-package com.glostock.command;
+package com.glostock.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class PortfolioVO {
 	private String pfname;
@@ -8,13 +8,13 @@ public class PortfolioVO {
 	private String ticker;
 	private String nickname;
 	private String transaction;
-	private Timestamp date; 
+	private Timestamp regdate; 
 	private String shares;
 	private String price;
 	
 	public PortfolioVO() {}
 
-	public PortfolioVO(String pfname, int pfnum, String ticker, String nickname, String transaction, Timestamp date,
+	public PortfolioVO(String pfname, int pfnum, String ticker, String nickname, String transaction, Timestamp regdate,
 			String shares, String price) {
 		super();
 		this.pfname = pfname;
@@ -22,7 +22,7 @@ public class PortfolioVO {
 		this.ticker = ticker;
 		this.nickname = nickname;
 		this.transaction = transaction;
-		this.date = date;
+		this.regdate = regdate;
 		this.shares = shares;
 		this.price = price;
 	}
@@ -67,12 +67,12 @@ public class PortfolioVO {
 		this.transaction = transaction;
 	}
 
-	public Timestamp getDate() {
-		return date;
+	public Timestamp getRegdate() {
+		return regdate;
 	}
 
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setRegdate(Timestamp regdate) {
+		this.regdate = regdate;
 	}
 
 	public String getShares() {

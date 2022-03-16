@@ -46,7 +46,7 @@ flex: 1;
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="/" class="nav-link link-dark" aria-current="page">Home</a></li>
         <li class="nav-item"><a href="#" class="nav-link link-dark">Market</a></li>
-        <li class="nav-item"><a href="#" class="nav-link link-dark">Pro YouTube</a></li>
+        <li class="nav-item"><a href="#" class="nav-link link-dark">Learn</a></li>
         <li class="nav-item"><a href="#" class="nav-link link-dark">Loan</a></li>
         <li class="nav-item"><a href="/help" class="nav-link link-dark">Help</a></li>
       </ul>

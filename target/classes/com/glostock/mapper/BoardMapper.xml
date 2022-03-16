@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.glostock.mapper.BoardMapper">
+
+<!--마이페이지 내정보 불러오기 -->
+<select id="mypage" parameterType="String" resultType="com.glostock.model.BoardVO">
+	SELECT nickname 
+ 	FROM glo_user
+	 WHERE email=#{email} 
+</select>
+
+<!-- 피드등록 -->
+<insert id="insertfeed">
+	insert into glo_board (title,ticker,content,nickname)
+		values (#{title},#{ticker},#{content},#{nickname})
+</insert>
+
+<!-- 피드가져오기 -->
+<select id="getfeed" resultType="com.glostock.model.BoardVO">
+	SELECT * from glo_board ORDER BY postnum desc
+</select>
+
+<!-- 피드가져오기 -->
+<select id="myfeed"  resultType="com.glostock.model.BoardVO" parameterType="com.glostock.model.BoardVO">
+	SELECT * from glo_board where nickname=${nickname} ORDER BY postnum desc 
+	
+</select>
+
+
+
+
+
+
+
+</mapper>

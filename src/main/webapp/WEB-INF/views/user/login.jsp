@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Signin Template · Bootstrap v5.1</title>
+    <title>Glo Stock | 로그인</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
@@ -71,16 +71,16 @@
   <div class="wrapper"> 
 <main class="form-signin">
 
-  <form>
+  <form action="loginForm" method="post">
     <img class="mb-4" src="/resources/img/Glostockblack.png" alt="" width="100" height="100">
-    <h1 class="h3 mb-3 fw-normal">ID 로그인</h1>
+    <h1 class="h3 mb-3 fw-normal">이메일 로그인</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="아이디">
-      <label for="floatingInput">아이디</label>
+      <input type="text" class="form-control" id="email" name="email" placeholder="Hongildong@glostock.com" >
+      <label for="floatingInput">이메일</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
+      <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
       <label for="floatingPassword">비밀번호</label>
     </div>
 
@@ -89,7 +89,7 @@
         <input type="checkbox" value="remember-me"> 로그인 상태 유지
       </label>
     </div>
-    <button type="button" class="w-100 btn btn-secondary" type="submit">로그인</button>
+    <button  class="w-100 btn btn-secondary" type="submit">로그인</button>
 
     <p class="mt-5 mb-3 text-muted">&copy; 2022 GloStock. All rights reserved </p>
   </form>
@@ -97,7 +97,13 @@
 </main>
 </div>
 
+
+
+
+
+<br><br><br><br><br><br>
        <%@ include file="../include/footer.jsp" %>
+       
   </body>
   
 

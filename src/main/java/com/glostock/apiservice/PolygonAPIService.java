@@ -105,7 +105,7 @@ public class PolygonAPIService {
         return profile;
     }
 
-    public static ArrayList<StockVO> getFollowList() throws IOException {
+    public static ArrayList<StockVO> getDiscoverList() throws IOException {
         ArrayList<StockVO> followList = new ArrayList<>();
 
         String DISCOVER_URL = "https://api.polygon.io/v3/reference/tickers?type=CS&exchange=XNYS&active=true&sort=ticker&order=asc&limit=3&apiKey=Q2mEmcBtNaeo2pmA5WgKU0h7rVYvFrJY";
@@ -128,7 +128,6 @@ public class PolygonAPIService {
             JSONObject jObject = new JSONObject(discoverResponse.toString());
 
             JSONArray discoverResultArray = jObject.getJSONArray("results");
-            System.out.println(discoverResultArray.length());
 
             for (Object jsonObject : discoverResultArray) {
                 StockVO vo = new StockVO();

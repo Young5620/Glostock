@@ -14,16 +14,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0// EN"
 
 	<!--resultType속성값은 select의 결과를 특정 객체로 만들어서 반환 -->
 	<!--VO에 기술된 멤버변수는 DB의 컬럼명과 정확히 일치해야 한다. -->
+	
 	<insert id="insert" > 
-	INSERT INTO portfolio (pfname,ticker,transaction,shares,nickname,price) values (#{pfname},#{ticker},#{transaction},#{shares},#{nickname},#{price})
+	INSERT INTO portfolio_2nd (pfname,ticker,transaction,shares,nickname,price) values (#{pfname,jdbcType=VARCHAR},#{ticker,jdbcType=VARCHAR},#{transaction,jdbcType=VARCHAR},#{shares,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR},#{price,jdbcType=VARCHAR})
 	</insert>
 	
-	<select id="select" parameterType="String" resultType="com.glostock.command.PortfolioVO"> 
-		SELECT pfnum, ticker, transaction, shares from portfolio order by pfnum
+	<select id="select_nick" parameterType="String" resultType="com.glostock.model.PortfolioVO"> 
+		SELECT * from portfolio_2nd where nickname=#{nickname} order by pfnum ASC
+	</select>
+	
+	<select id="select" parameterType="String" resultType="com.glostock.model.PortfolioVO"> 
+		SELECT * from portfolio_2nd where pfname=#{pfname} order by pfnum ASC
 	</select>
 
 	<delete id="delete" parameterType="String">
-		DELETE FROM portfolio where pfname=#{pfname}
+		DELETE FROM portfolio_2nd where pfname=#{pfname}
 	</delete>
 
 </mapper>

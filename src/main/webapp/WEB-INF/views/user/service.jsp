@@ -144,11 +144,10 @@
 
 
 <main class="container">
-
     <div class="row g-5">
         <div class="col-md-8">
-            <h3 class="pb-4 mb-4 fst-italic border-bottom">
-                <b>Glo 툴즈</b>
+            <h3>
+                <b>Glo Tools</b>
             </h3>
 
  <div class="accordion" id="accordionExample">
@@ -258,6 +257,16 @@
     </h2>
     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div class="accordion-body">
+      
+        <h6>
+      <b>☞</b>주식을 취득하여 기업으로부터 받은 배당금의 수익률을 계산할 수 있습니다.<br><br>
+      <b>☞</b>단순한 배당락일 효과로 인한 주가의 하락은 배당 수익률의 증가를 의미하지만 배당금 자체의 꾸준한 
+      증분효과도 중요합니다. 
+       <br><br>
+      <p><a href="https://www.dividend.com/"><b>☞</b>티커명으로 배당일정 확인하기</a></p>
+      
+      </h6>
+      
       
          <form action="divForm" method="post"> 
       	<table> 
@@ -378,6 +387,18 @@
     </h2>
     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
       <div class="accordion-body">
+      
+        <h6>
+      <b>☞</b>이자의 이자, 특히 주식을 장기보유할 시 발생하는 복리효과를 계산할 수 있습니다.<br><br>
+      <b>☞</b>
+      Compound interest is the eighth wonder of the world. He who understands it, earns it … he who doesn't … pays it. <br>
+"여덟 번째 세계 불가사는 바로 복리다. 복리를 이해하는 자는 돈을 벌고 그렇지 못하는 자는 지불하게 될 것이다." <br>
+- 알베르트 아인슈타인
+
+      </h6>
+      
+      
+      
       
       
        <form action="compoundForm" method="post"> 

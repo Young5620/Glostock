@@ -4,6 +4,8 @@
 <%@page import="yahoofinance.Stock"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%
   Stock TSLA = YahooFinance.get("TSLA");
@@ -107,7 +109,7 @@
       <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/user/feed">Feed</a>
@@ -138,9 +140,9 @@
 <main class="container">
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark main-banner">
     <div class="col-md-6 px-0">
-      <h1 class="display-4 fst-italic">요즘 멘션이 많은 종목 TOP 10</h1>
-      <p class="lead my-3">요즘 뭐가 대세인지 모르겠다고요? 좀처럼 감을 잡을 실 수 없으시다고요? <br> 그래서 준비했습니다!</p>
-      <p class="lead mb-0"><a href="#" class="text-white fw-bold">더보기...</a></p>
+      <h1 class="display-4">글로스탁 유저멘션 TOP 10</h1>
+      <p class="lead my-3">요즘 뭐가 대세인지 모르겠다고요? <br> 그래서 준비했습니다!</p>
+      <p class="lead mb-0"><a href="#" class="text-white fw-bold">더보기</a></p>
     </div>
   </div>
 
@@ -148,10 +150,11 @@
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static bg-white">
-          <strong class="d-inline-block mb-2 text-primary">Personal Analysis</strong>
+          <strong class="d-inline-block mb-2 text-primary">Global</strong>
           <h3 class="mb-0">월드 리포드 Vol. 3</h3>
-          <div class="mb-1 text-muted">Feb 25</div>
-          <p class="card-text mb-auto">러시아와 우크라이나의 갈등이 계속되는 상황...</p>
+          <div class="mb-1 text-muted">Mar 7</div>
+          <p class="card-text mb-auto">러시아와 우크라이나의 전쟁이 계속되는 가운데.. <br>
+          전쟁 장기화와 더불어 거시경제 영향까지 글로스탁이 다뤄봤습니다.</p>
           <a href="#" class="stretched-link">이번주 월드 리포드 보기</a>
         </div>
         <div class="col-auto d-none d-lg-block">
@@ -163,15 +166,17 @@
     <div class="col-md-6">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static bg-white">
-          <strong class="d-inline-block mb-2 text-success">Daily Report</strong>
-          <h3 class="mb-0">데일리 리포트</h3>
+          <strong class="d-inline-block mb-2 text-success">Weekly</strong>
+          <h3 class="mb-0">위클리 리포트</h3>
           <div class="mb-1 text-muted">Mar 3</div>
-          <p class="mb-auto">제 20대 대통령 선거 D-6일... 각 후보들의 경제와 외교 정책들을 살펴보는 시리즈... 오늘은 기호 1번 이재명 후보입니다.</p>
-          <a href="#" class="stretched-link">더 읽기...</a>
+          <p class="mb-auto">금리인상, 인플레이션, 러시아발전쟁.. 계속되는 악재에 투자자의 
+          마음만 복잡해져갑니다. 반복되는 주식시장 악재, 어떻게 해석해야할까요? <br>글로스탁에서 다뤄보았습니다.<br>
+            </p>
+          <a href="#" class="stretched-link">더 읽기</a>
         </div>
         <div class="col-auto d-none d-lg-block">
 <%--          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>--%>
-          <img src="/resources/img/daily-report-thumbnail.jpg" width="200" height="250">
+          <img src="/resources/img/inflation.jpg" width="200" height="250">
 
         </div>
       </div>
@@ -187,145 +192,24 @@
         My Feed
       </h3>
 
+	<c:forEach var="good" items="${feed}" >
       <article class="blog-post">
-        <h2 class="blog-post-title">Test Glo Stock Post</h2>
-        <p class="blog-post-meta">Feburary 25, 2022 by <a href="#">Testuser1</a></p>
-        <p class="blog-post-meta">Source: <a href="">Glo Stock User</a> </p>
-        <p class="blog-post-meta">Tag: <a href="">$TSLA</a></p>
+        <h2 class="blog-post-title">${good.title}</h2>
+        <p class="blog-post-meta">${good.regdate} by ${good.nickname}</p>
+       
+        <p class="blog-post-meta">티커심볼:<a href="">${good.ticker}</a></p>
 
-        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
-        <ul>
-          <li>First list item</li>
-          <li>Second list item with a longer description</li>
-          <li>Third list item to close it out</li>
-        </ul>
-        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the other highly repetitive body text used throughout.</p>
+        <p> ${good.content}</p>
+      
+     
+      
+      
       </article>
+	</c:forEach>
 
-      <article class="blog-post">
-        <h2 class="blog-post-title">Test Glo Stock Post 2</h2>
-        <p class="blog-post-meta">Feburary 25, 2022 by <a href="#">Testuser2</a></p>
-        <p class="blog-post-meta">Source: <a href="">Twitter</a> </p>
-        <p class="blog-post-meta">Tag: <a href="">$TSLA</a></p>
 
-        <blockquote class="twitter-tweet"><p lang="und" dir="ltr"><a href="https://t.co/OrLV2c3qy2">pic.twitter.com/OrLV2c3qy2</a></p>&mdash; Elon Musk (@elonmusk) <a href="https://twitter.com/elonmusk/status/1496252264171941888?ref_src=twsrc%5Etfw">February 22, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-      </article>
 
-      <article class="blog-post">
-        <h2 class="blog-post-title">Sample blog post</h2>
-        <p class="blog-post-meta">January 1, 2021 by <a href="#">Mark</a></p>
-
-        <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, lists, tables, images, code, and more are all supported as expected.</p>
-        <hr>
-        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
-        <h2>Blockquotes</h2>
-        <p>This is an example blockquote in action:</p>
-        <blockquote class="blockquote">
-          <p>Quoted text goes here.</p>
-        </blockquote>
-        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
-        <h3>Example lists</h3>
-        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the other highly repetitive body text used throughout. This is an example unordered list:</p>
-        <ul>
-          <li>First list item</li>
-          <li>Second list item with a longer description</li>
-          <li>Third list item to close it out</li>
-        </ul>
-        <p>And this is an ordered list:</p>
-        <ol>
-          <li>First list item</li>
-          <li>Second list item with a longer description</li>
-          <li>Third list item to close it out</li>
-        </ol>
-        <p>And this is a definition list:</p>
-        <dl>
-          <dt>HyperText Markup Language (HTML)</dt>
-          <dd>The language used to describe and define the content of a Web page</dd>
-          <dt>Cascading Style Sheets (CSS)</dt>
-          <dd>Used to describe the appearance of Web content</dd>
-          <dt>JavaScript (JS)</dt>
-          <dd>The programming language used to build advanced Web sites and applications</dd>
-        </dl>
-        <h2>Inline HTML elements</h2>
-        <p>HTML defines a long list of available inline tags, a complete list of which can be found on the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">Mozilla Developer Network</a>.</p>
-        <ul>
-          <li><strong>To bold text</strong>, use <code class="language-plaintext highlighter-rouge">&lt;strong&gt;</code>.</li>
-          <li><em>To italicize text</em>, use <code class="language-plaintext highlighter-rouge">&lt;em&gt;</code>.</li>
-          <li>Abbreviations, like <abbr title="HyperText Markup Langage">HTML</abbr> should use <code class="language-plaintext highlighter-rouge">&lt;abbr&gt;</code>, with an optional <code class="language-plaintext highlighter-rouge">title</code> attribute for the full phrase.</li>
-          <li>Citations, like <cite>— Mark Otto</cite>, should use <code class="language-plaintext highlighter-rouge">&lt;cite&gt;</code>.</li>
-          <li><del>Deleted</del> text should use <code class="language-plaintext highlighter-rouge">&lt;del&gt;</code> and <ins>inserted</ins> text should use <code class="language-plaintext highlighter-rouge">&lt;ins&gt;</code>.</li>
-          <li>Superscript <sup>text</sup> uses <code class="language-plaintext highlighter-rouge">&lt;sup&gt;</code> and subscript <sub>text</sub> uses <code class="language-plaintext highlighter-rouge">&lt;sub&gt;</code>.</li>
-        </ul>
-        <p>Most of these elements are styled by browsers with few modifications on our part.</p>
-        <h2>Heading</h2>
-        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
-        <h3>Sub-heading</h3>
-        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
-        <pre><code>Example code block</code></pre>
-        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the other highly repetitive body text used throughout.</p>
-      </article>
-
-      <article class="blog-post">
-        <h2 class="blog-post-title">Another blog post</h2>
-        <p class="blog-post-meta">December 23, 2020 by <a href="#">Jacob</a></p>
-
-        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
-        <blockquote>
-          <p>Longer quote goes here, maybe with some <strong>emphasized text</strong> in the middle of it.</p>
-        </blockquote>
-        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
-        <h3>Example table</h3>
-        <p>And don't forget about tables in these posts:</p>
-        <table class="table">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Upvotes</th>
-            <th>Downvotes</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>Alice</td>
-            <td>10</td>
-            <td>11</td>
-          </tr>
-          <tr>
-            <td>Bob</td>
-            <td>4</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>Charlie</td>
-            <td>7</td>
-            <td>9</td>
-          </tr>
-          </tbody>
-          <tfoot>
-          <tr>
-            <td>Totals</td>
-            <td>21</td>
-            <td>23</td>
-          </tr>
-          </tfoot>
-        </table>
-
-        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the other highly repetitive body text used throughout.</p>
-      </article>
-
-      <article class="blog-post">
-        <h2 class="blog-post-title">New feature</h2>
-        <p class="blog-post-meta">December 14, 2020 by <a href="#">Chris</a></p>
-
-        <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
-        <ul>
-          <li>First list item</li>
-          <li>Second list item with a longer description</li>
-          <li>Third list item to close it out</li>
-        </ul>
-        <p>This is some additional paragraph placeholder content. It's a slightly shorter version of the other highly repetitive body text used throughout.</p>
-      </article>
 
       <nav class="blog-pagination" aria-label="Pagination">
         <a class="btn btn-outline-primary" href="#">위로</a>
@@ -386,14 +270,7 @@
               %>
                 <p>출처: <a href="https://finance.yahoo.com/">Yahoo Finance</a></p>
 
-        <div class="p-4">
-          <h4 class="fst-italic">My Service</h4>
-          <ol class="list-unstyled">
-            <li><a href="#">세금계산기</a></li>
-            <li><a href="#">공모주 배당계산</a></li>
-            <li><a href="#">포트폴리오 상담</a></li>
-          </ol>
-        </div>
+     
       </div>
     </div>
   </div>

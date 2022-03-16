@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.glostock.mapper.UserMapper">
+
+<!-- 회원가입처리  -->
+<insert id="join" parameterType="com.glostock.model.UserVO">
+	insert into glo_user (username,nickname, email, password, phone, dataagree)
+		values (#{username,jdbcType=VARCHAR},#{nickname,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR},#{dataagree})
+</insert>
+
+<!--로그인 처리 -->
+<select id="login" 
+resultType="int"
+parameterType="com.glostock.model.UserVO">
+SELECT COUNT(*)
+ FROM glo_user
+ WHERE email=#{email} and password=#{password}
+</select>
+
+<!--마이페이지 내정보 불러오기 -->
+<select id="mypage" parameterType="String" resultType="com.glostock.model.UserVO">
+	SELECT *
+ 	FROM glo_user
+	 WHERE email=#{email} 
+</select>
+
+<!-- 내정보변경하기 -->
+<update id="update" parameterType="com.glostock.model.UserVO">
+	UPDATE glo_user set 
+	username=#{username}, 
+	nickname= #{nickname},
+	phone=#{phone}
+	where email= #{email} 
+</update>
+
+<!--비밀번호변경하기 -->
+<update id="passwordchange" parameterType="com.glostock.model.UserVO" >
+	UPDATE glo_user set 
+	password=#{newpassword}
+	where email= #{email} 
+</update>
+
+<delete id="userleave" parameterType="com.glostock.model.UserVO">
+	DELETE FROM glo_user 
+	where email=#{email} and password=#{password}
+
+</delete>
+
+
+
+
+
+
+
+
+</mapper>
+
+

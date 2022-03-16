@@ -1,18 +1,31 @@
 <%@ page import="com.glostock.model.StockVO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.glostock.apiservice.PolygonAPIService" %>
+<%@ page import="com.glostock.apiservice.FmpAPIService" %>
+<%@ page import="java.lang.reflect.Array" %>
+<%@ page import="yahoofinance.Stock" %>
+<%@ page import="yahoofinance.YahooFinance" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    ArrayList<StockVO> followList = new ArrayList<>();
+    int discoverCounter = 0;
+
+    ArrayList<StockVO> followList = (ArrayList<StockVO>)session.getAttribute("follow_list");
+
+//    ArrayList<StockVO> followList = new ArrayList<>();
+//    StockVO TSLA = new StockVO("TSLA", "Tesla, Inc.", 100, 100, 10);
+//    followList.add(TSLA);
 
     ArrayList<StockVO> discoverList = null;
     try {
-        discoverList = PolygonAPIService.getFollowList();
+        discoverList = PolygonAPIService.getDiscoverList();
+        discoverCounter += discoverList.size();
     } catch (NullPointerException e) {
         discoverList = new ArrayList<>();
     }
+
+    ArrayList<StockVO> moreDiscoverList = new ArrayList<>();
 
 %>
 
@@ -96,6 +109,19 @@
             font-weight: bold;
         }
 
+        .follow-card-logo {
+            margin: auto;
+            text-align: center;
+        }
+
+        .follow-card-header {
+            margin: auto;
+        }
+
+        .follow-card-price {
+            margin: auto;
+        }
+
     </style>
 
 </head>
@@ -158,61 +184,23 @@
                     for (StockVO followVO : followList) {
                 %>
                 <div class="card follow-card">
-                    <div class="card-header">
+                    <div class="card-header follow-card-header">
                         <h5 class="card-title"><%=followVO.getName()%></h5>
                         <h6 class="card-title">$<%=followVO.getTicker()%></h6>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body follow-card-logo">
                         <img src="<%=followVO.getLogo_url() + "?apiKey=Q2mEmcBtNaeo2pmA5WgKU0h7rVYvFrJY"%>" alt="logo">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body follow-card-price">
                         <p class="card-text">Curr. Price: $<%=followVO.getCurrent_price()%> · Prev. Close: $<%=followVO.getPrev_close_price()%> · Delta: $<%=followVO.getChange_in_percentage()%></p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="btn btn-outline-success">회사 프로필</a>
+                        <a href="/user/deleteFollow?ticker=TSLA" class="btn btn-outline-danger">Unfollow</a>
                     </div>
                 </div>
                 <%
                     }
                 %>
-
-
-                <div class="card follow-card">
-                    <div class="card-header">
-                        <h5 class="card-title">$TSLA</h5>
-                        <img src="" alt="logo">
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-
-                <div class="card follow-card">
-                    <div class="card-header">
-                        <h5 class="card-title">$AAPL</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
-
-                <div class="card follow-card">
-                    <div class="card-header">
-                        <h5 class="card-title">$MSFT</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="btn btn-primary">Button</a>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -229,7 +217,23 @@
 
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row row-cols-1">
+            <div class="row row-cols-1" id="addTarget">
+
+                <div class="card follow-card text-white bg-dark">
+                    <div class="card-header discover-card-header text-white bg-dark">
+                        <h5 class="card-title discover-title">Tesla, Inc.</h5>
+                        <h6 class="card-title discover-title">$TSLA</h6>
+                    </div>
+                    <div class="card-body discover-card-body">
+                        <img src="https://api.polygon.io/v1/reference/company-branding/d3d3LnRlc2xhLmNvbQ/images/2022-01-10_icon.png + "?apiKey=Q2mEmcBtNaeo2pmA5WgKU0h7rVYvFrJY"%" alt="TESLA logo">
+                    </div>
+                    <div class="card-body discover-card-body-main">
+                        <p class="card-text">Curr. Price: $100 · Prev. Close: $120 · Delta: $20%</p>
+                    </div>
+                    <div class="card-footer discover-card-footer text-white bg-dark">
+                        <a href="/user/addFollow?ticker=TSLA" class="btn btn-outline-success">Follow</a>
+                    </div>
+                </div>
 
                 <%
                     for (StockVO discoverVO : discoverList) {
@@ -240,13 +244,13 @@
                                     <h6 class="card-title discover-title">$<%=discoverVO.getTicker()%></h6>
                                 </div>
                                 <div class="card-body discover-card-body">
-                                    <img src="<%=discoverVO.getLogo_url() + "?apiKey=Q2mEmcBtNaeo2pmA5WgKU0h7rVYvFrJY"%>" alt="logo">
+                                    <img src="<%=discoverVO.getLogo_url() + "?apiKey=Q2mEmcBtNaeo2pmA5WgKU0h7rVYvFrJY"%>" alt="<%=discoverVO.getName()%> logo">
                                 </div>
                                 <div class="card-body discover-card-body-main">
                                     <p class="card-text">Curr. Price: $<%=discoverVO.getCurrent_price()%> · Prev. Close: $<%=discoverVO.getPrev_close_price()%> · Delta: $<%=discoverVO.getChange_in_percentage()%></p>
                                 </div>
                                 <div class="card-footer discover-card-footer text-white bg-dark">
-                                    <a href="#" class="btn btn-outline-success">Follow</a>
+                                    <a href="/user/addFollow?ticker=TSLA" class="btn btn-outline-success">Follow</a>
                                 </div>
                             </div>
                         <%
@@ -255,7 +259,7 @@
 
             </div>
             <div class="d-grid gap-2">
-                <button class="btn btn-primary" type="button">더 보기</button>
+                <button class="btn btn-primary" type="button" onclick="discoverMore(<%=discoverCounter%>)">더 보기</button>
             </div>
         </div>
     </div>
@@ -266,6 +270,80 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="module"></script>
+<script type="text/javascript">
+    function discoverMore(counter) {
+        let moreDiscoverListSize = <%=moreDiscoverList.size()%>;
+        if (moreDiscoverListSize == 0) {
+            let url = 'https://api.polygon.io/v3/reference/tickers?type=CS&exchange=XNYS&active=true&sort=ticker&order=asc&limit=100';
+
+            let headers = new Headers();
+
+            headers.append('Authorization', 'Bearer Q2mEmcBtNaeo2pmA5WgKU0h7rVYvFrJY');
+
+            let result = fetch(url,
+                {method:'GET',
+                    headers: headers
+                }
+            ).then(function(response) { return response.json(); }).then(function(json) {
+                console.log(json["results"]);
+                console.log(json["results"].length)
+                for (let i = <%=discoverCounter%>; i < <%=discoverCounter + 3%>; i++) {
+                    console.log(json["results"][i]);
+
+                    const first = document.createElement("div");
+                    first.classList.add("card", "follow-card", "text-white", "bg-dark");
+
+                    const secondOne = document.createElement("div");
+                    secondOne.classList.add("card-header", "discover-card-header", "text-white", "bg-dark");
+                    const thirdOne = document.createElement("h5");
+                    thirdOne.classList.add("card-title", "discover-title");
+                    thirdOne.innerText = json["results"][i]["name"]
+                    const thirdTwo = document.createElement("h6");
+                    thirdTwo.classList.add("card-title", "discover-title");
+                    thirdTwo.innerText = json["results"][i]["ticker"];
+                    secondOne.appendChild(thirdOne);
+                    secondOne.appendChild(thirdTwo);
+
+                    const secondTwo = document.createElement("div");
+                    secondTwo.classList.add("card-body", "discover-card-body");
+                    const thirdThree = document.createElement("img");
+                    <%--thirdThree.src = <%=json["result"].getLogo_url() + "?apiKey=Q2mEmcBtNaeo2pmA5WgKU0h7rVYvFrJY"%>"--%>
+                    secondTwo.appendChild(thirdThree);
+
+                    const secondThree = document.createElement("div");
+                    secondThree.classList.add("card-body", "discover-card-body-main");
+                    const thirdFour = document.createElement("p");
+                    thirdFour.innerText = "Curr. Price: $Test · Prev. Close: $Test · Delta: $Test";
+                    thirdFour.classList.add("card-text");
+                    secondThree.appendChild(thirdFour);
+
+                    const secondFour = document.createElement("div");
+                    secondFour.classList.add("card-footer", "discover-card-footer", "text-white", "bg-dark")
+                    const thirdFive = document.createElement("a");
+                    thirdFive.innerText = "Follow";
+                    thirdFive.classList.add("btn", "btn-outline-success");
+                    secondFour.appendChild(thirdFive);
+
+                    first.appendChild(secondOne);
+                    first.appendChild(secondTwo);
+                    first.appendChild(secondThree);
+                    first.appendChild(secondFour);
+
+                    document.getElementById("addTarget").appendChild(first);
+                }
+                <%
+                discoverCounter = discoverCounter + 3;
+                %>
+            })
+        } else {
+
+        }
+
+
+
+    }
+</script>
 
 </body>
 </html>

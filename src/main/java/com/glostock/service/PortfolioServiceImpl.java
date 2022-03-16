@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.glostock.command.PortfolioVO;
 import com.glostock.mapper.PortfolioMapper;
+import com.glostock.model.PortfolioVO;
 @Service
 public class PortfolioServiceImpl implements PortfolioService {
 	
@@ -14,8 +14,9 @@ public class PortfolioServiceImpl implements PortfolioService {
 	private PortfolioMapper mapper;
 	
 	@Override
-	public ArrayList<PortfolioVO> getList() {
-		ArrayList<PortfolioVO> list = mapper.select();
+	public ArrayList<PortfolioVO> getList(String pfname) {
+		ArrayList<PortfolioVO> list = mapper.select(pfname);
+		
 		return list;
 	}
 
@@ -26,16 +27,16 @@ public class PortfolioServiceImpl implements PortfolioService {
 	}
 	
 	@Override
-	public int insertPort(String pfname, String ticker, String transaction, String shares,String nickname,String price) {
-		PortfolioVO vo = new PortfolioVO();
-		vo.setPfname(pfname);
-		vo.setTicker(ticker);
-		vo.setTransaction(transaction);
-		vo.setShares(shares);
-		vo.setNickname(nickname);
-		vo.setPrice(price);
-
-		int result = mapper.insert(vo);
-		return result;
+	public void insertPort(PortfolioVO vo) {
+		System.out.println("==서비스==");
+		System.out.println("ticker : "+vo.getTicker()+", transaction: "+vo.getTransaction());
+		mapper.insert(vo);
+		System.out.println("insert완료");
+	}
+	
+	@Override
+	public ArrayList<PortfolioVO> getList_nick(String nickname) {
+		ArrayList<PortfolioVO> list = mapper.select_nick(nickname);
+		return list;
 	}
 }

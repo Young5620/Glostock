@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,10 +55,10 @@ margin:0 auto;
         </div>
         
         <div class="span8">
-            <h3><b>더좋은</b></h3>
+            <h3><b>${mypage.username}님 환영합니다.</b></h3>
             <br><br> 
-            <h6>이메일: MyEmail@servidor.com</h6>
-            <h6>별명: 참좋은</h6>
+            <h6>이메일: ${sessionScope.user_email}</h6>
+            <h6>별명: ${mypage.nickname}</h6>
         </div>
         
       
@@ -76,10 +78,11 @@ margin:0 auto;
 		<header class="card-header"><h6 class="title"><b>회원정보</b> </h6></header>
 		<div class="filter-content">
 			<div class="list-group list-group-flush">
-			  <a href="#" class="list-group-item">내 정보 </a>
-			  <a href="#" class="list-group-item">내 정보수정</a>
-			  <a href="#" class="list-group-item">로그아웃</a>
-			  <a href="#" class="list-group-item">회원탈퇴</a>
+			  <a href="myinfo" class="list-group-item">내 정보</a>
+			  <a href="update" class="list-group-item">내 정보수정 </a>
+			  <a href="passwordupdate" class="list-group-item">비밀번호 변경</a>
+			  <a href="logout" class="list-group-item">로그아웃</a>
+			  <a href="userleave" class="list-group-item">회원탈퇴</a>
 			</div> 
 		</div>
 	</article> 
@@ -92,12 +95,11 @@ margin:0 auto;
 		<header class="card-header"><h6 class="title"><b>게시글 관리</b> </h6></header>
 		<div class="filter-content">
 			<div class="list-group list-group-flush">
-			  <a href="#" class="list-group-item">내 게시글 보기 </a>
-			  <a href="#" class="list-group-item">게시글 수정</a>
+			  <a href="myfeed " class="list-group-item">내 게시글 보기(수정) </a>
 			</div> 
 		</div>
 		</article> 
-		
+	
 		<article class="card-group-item">
 		<header class="card-header"><h6 class="title"><b>나의 자산</b> </h6></header>
 		<div class="filter-content">
@@ -120,9 +122,8 @@ margin:0 auto;
 		<header class="card-header"><h6 class="title"><b>고객센터</b> </h6></header>
 		<div class="filter-content">
 			<div class="list-group list-group-flush">
-			  <a href="#" class="list-group-item">FAQ</a>
-			  <a href="#" class="list-group-item">문의사항</a>
-			  <a href="#" class="list-group-item">고객센터</a>
+			  <a href="#" class="list-group-item">문의하기</a>
+			
 			</div> 
 		</div>
 	</article> 

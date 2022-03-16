@@ -2,10 +2,11 @@ package com.glostock.service;
 
 import java.util.ArrayList;
 
-import com.glostock.command.PortfolioVO;
+import com.glostock.model.PortfolioVO;
 
 public interface PortfolioService {
-	public int insertPort(String pfname, String ticker, String transaction, String shares, String nickname,String price);
-	public ArrayList<PortfolioVO> getList(); //portfolio 가져오기
+	public void insertPort(PortfolioVO vo);
+	public ArrayList<PortfolioVO> getList(String pfname); //portfolio 가져오기
+	public ArrayList<PortfolioVO> getList_nick(String nickname);
 	public void delete(String pfname); //portfolio 삭제
 }
