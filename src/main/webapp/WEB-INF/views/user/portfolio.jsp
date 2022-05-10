@@ -116,12 +116,10 @@
     <section class="margin_height"></section>
     
 	<div class="container">
-	<form action="portfolio_insert" method="post" name="regform">
-	<h6>Portfolio&nbsp;&nbsp;
-		<select class="btn btn-outline-dark btn-sm">
-			<option selected>Create New portfolio</option>
-		</select>
+	<h6>Portfolio&nbsp;&nbsp;<button class="btn btn-outline-dark btn-sm" onclick="location.href='portfolio'">Create New portfolio</button>
 	</h6>
+	<form action="portfolio_insert" method="post" name="regform">
+	
 	<table class="table border border-light border-3" id="table">
   <thead class="table-success">
     <tr>
@@ -136,7 +134,7 @@
       </th>
     </tr>
   </thead>
-  <tbody id="tbody">
+  <tbody id="tbody" class="tbody">
     
     <tr>
       <td style="text-align:center;" scope="row" id="No"><strong>1</strong></td>
@@ -149,8 +147,7 @@
 	  </td>
       <td><input class="rounded-3 border-1" type="text" size="15" id="shares" name="shares"></td>
       <td><input class="rounded-3 border-1" type="text" size="15" id="price" name="price"></td>
-      <td style="text-align:center;"><input type="button" value="현재 주가로" class="btn btn-outline-success btn-sm" 
-      name="today_price" onclick="today_price_get(this);"></td>
+      <td style="text-align:center;"><input type="button" value="현재 주가로" class="btn btn-outline-success btn-sm" name="today_price" onclick="today_price_get(this);"></td>
       <td style="text-align:center;"><input type="button" value="한 줄 삭제" class="btn btn-outline-danger btn-sm" name="clear_row" onclick="clear_row_del(this);"></td>
     </tr>
     
@@ -180,20 +177,43 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+var No = 2;
+
 function today_price_get(obj) {
-	var tr = obj.parentNode.parentNode;
-	if(document.tr.getElementById("ticker").value =="TSLA"){
-		document.tr.getElementById("price").value=<%=TSLA.getQuote().getPrice()%>; 
-	} else if(document.tr.getElementById("ticker").value=="AAPL"){
-		document.tr.getElementById("price").value=<%=AAPL.getQuote().getPrice()%>; 
-	} else if(document.tr.getElementById("ticker").value=="AMZN"){
-		document.tr.getElementById("price").value=<%=AMZN.getQuote().getPrice()%>;
-	} else if(document.tr.getElementById("ticker").value=="FB"){
-		document.tr.getElementById("price").value=<%=FB.getQuote().getPrice()%>;
-	} else if(document.tr.getElementById("ticker").value=="ADS"){
-		document.tr.getElementById("price").value=<%=ADS.getQuote().getPrice()%>; 
+	const ticker = document.getElementsByName("ticker");
+	const price = document.getElementsByName("price");
+	console.log(obj.parentNode.parentNode.rowIndex);
+	var Num = obj.parentNode.parentNode.rowIndex-1;
+	console.log(ticker[Num].value);
+	if(ticker[Num].value =="TSLA"){
+		price[Num].value=<%=TSLA.getQuote().getPrice()%>; 
+	} else if(ticker[Num].value=="AAPL"){
+		price[Num].value=<%=AAPL.getQuote().getPrice()%>; 
+	} else if(ticker[Num].value=="AMZN"){
+		price[Num].value=<%=AMZN.getQuote().getPrice()%>;
+	} else if(ticker[Num].value=="FB"){
+		price[Num].value=<%=FB.getQuote().getPrice()%>;
+	} else if(ticker[Num].value=="ADS"){
+		price[Num].value=<%=ADS.getQuote().getPrice()%>; 
+	}	
+}
+function today_price_add_get(obj) {
+	const ticker = document.getElementsByName("ticker");
+	const price = document.getElementsByName("price");
+	console.log(obj.parentNode.parentNode.parentNode.rowIndex);
+	var Num = obj.parentNode.parentNode.parentNode.rowIndex-1;
+	console.log(ticker[Num].value);
+	if(ticker[Num].value =="TSLA"){
+		price[Num].value=<%=TSLA.getQuote().getPrice()%>; 
+	} else if(ticker[Num].value=="AAPL"){
+		price[Num].value=<%=AAPL.getQuote().getPrice()%>; 
+	} else if(ticker[Num].value=="AMZN"){
+		price[Num].value=<%=AMZN.getQuote().getPrice()%>;
+	} else if(ticker[Num].value=="FB"){
+		price[Num].value=<%=FB.getQuote().getPrice()%>;
+	} else if(ticker[Num].value=="ADS"){
+		price[Num].value=<%=ADS.getQuote().getPrice()%>; 
 	}
-	
 }
 
 function clear_row_del(obj) {
@@ -204,30 +224,29 @@ function clear_row_del(obj) {
 function clear_row_del_add(obj) {
 	   var tr = obj.parentNode.parentNode;
 	   tr.parentNode.remove(tr);
-	}
+}
 
-var No = 2;
+
 function ADDRow() {
 	
 	var tbody = document.getElementById('tbody');
     var row = tbody.insertRow(tbody.rows.length); // 하단에 추가
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
-    var cell6 = row.insertCell(5);
-    var cell7 = row.insertCell(6);
+    var cell0 = row.insertCell(0);
+    var cell1 = row.insertCell(1);
+    var cell2 = row.insertCell(2);
+    var cell3 = row.insertCell(3);
+    var cell4 = row.insertCell(4);
+    var cell5 = row.insertCell(5);
+    var cell6 = row.insertCell(6);
 	
-    cell1.innerHTML = '<center><strong>'+No+'<strong></center>';
-    cell2.innerHTML = '<input class="rounded-3 border-1" type="text" id="ticker" size="10" name="ticker">';
-    cell3.innerHTML = '<select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" id="transaction" name="transaction"><option selected>매수</option><option value="매도">매도</option><option value="예약">예약</option></select>';
-    cell4.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" id="shares" name="shares">';
-    cell5.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" id="price" name="price">';
-    cell6.innerHTML = '<center><input type="button" value="현재 주가로" class="btn btn-outline-success btn-sm" onclick=\'today_price_get(this);\'></center>'';
-    cell7.innerHTML = '<center><input type="button" value="한 줄 삭제" class="btn btn-outline-danger btn-sm" name="clear_row" onclick=\'clear_row_del_add(this);\'></center>';
-    No++;
-    
+    cell0.innerHTML = '<center><strong>'+No+'<strong></center>';
+    cell1.innerHTML = '<input class="rounded-3 border-1" type="text" id="ticker" size="10" name="ticker">';
+    cell2.innerHTML = '<select class="btn btn-outline-secondary btn-sm" aria-label="Default select example" id="transaction" name="transaction"><option selected>매수</option><option value="매도">매도</option><option value="예약">예약</option></select>';
+    cell3.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" id="shares" name="shares">';
+    cell4.innerHTML = '<input class="rounded-3 border-1" type="text" size="15" id="price" name="price">';
+    cell5.innerHTML = '<center><input type="button" value="현재 주가로" class="btn btn-outline-success btn-sm" onclick=\'today_price_add_get(this);\'></center>';
+    cell6.innerHTML = '<center><input type="button" value="한 줄 삭제" class="btn btn-outline-danger btn-sm" name="clear_row" onclick=\'clear_row_del_add(this);\'></center>';
+    No++; 
 }
 
 </script>

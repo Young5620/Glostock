@@ -320,10 +320,13 @@ public class UserServiceController {
 		String nickname = (String)session.getAttribute("nickname");
 		
 		ArrayList<PortfolioVO> list = portservice.getList_nick(nickname);
+		ArrayList<String> list_real = new ArrayList<>();
 		for(PortfolioVO vo:list) {
+			System.out.println(vo.getPfname());
+			if(!list_real.contains(vo.getPfname())) list_real.add(vo.getPfname());
 			session.setAttribute("pfname", vo.getPfname());
 		}
-		model.addAttribute("list", list);
+		model.addAttribute("list", list_real);
 		return "user/portfolio_list";
 	}
 	

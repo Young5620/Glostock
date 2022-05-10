@@ -20,11 +20,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0// EN"
 	</insert>
 	
 	<select id="select_nick" parameterType="String" resultType="com.glostock.model.PortfolioVO"> 
-		SELECT * from portfolio_2nd where nickname=#{nickname} order by pfnum ASC
+		SELECT * from portfolio_2nd where nickname=#{nickname,jdbcType=VARCHAR} order by pfnum ASC
 	</select>
 	
 	<select id="select" parameterType="String" resultType="com.glostock.model.PortfolioVO"> 
-		SELECT * from portfolio_2nd where pfname=#{pfname} order by pfnum ASC
+		SELECT * from portfolio_2nd where pfname=#{pfname,jdbcType=VARCHAR} order by pfnum ASC
 	</select>
 
 	<delete id="delete" parameterType="String">

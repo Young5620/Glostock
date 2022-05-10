@@ -134,13 +134,13 @@
   </thead>
   <tbody style="text-align:center;"> 
 	<%
-	ArrayList<PortfolioVO> list = (ArrayList<PortfolioVO>)request.getAttribute("list");
+	ArrayList<String> list = (ArrayList<String>)request.getAttribute("list");
 	int no=1;
-	for(PortfolioVO str : list){
+	for(String str : list){
 	%>
 	<tr>
 	<th><%=no %></th>
-	<td><a href="/user/portfolio_result?pfname=<%=str.getPfname()%>"><strong><%=str.getPfname() %></strong></a></td>
+	<td><a href="/user/portfolio_result?pfname=<%=str%>"><strong><%=str %></strong></a></td>
 	<td><input type="checkbox"></td>
 	</tr>
 	<% no++;}%>

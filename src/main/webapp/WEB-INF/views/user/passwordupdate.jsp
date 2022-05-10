@@ -32,7 +32,7 @@
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
     }
     body {
-    background: linear-gradient(to right, #61E6DC, #FDEBE2);
+      		background: linear-gradient(to bottom right, #54E6DE, pink);
 	}
     
   </style>
