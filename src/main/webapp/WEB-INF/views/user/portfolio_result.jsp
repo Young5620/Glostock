@@ -371,10 +371,10 @@ var tr = tbody.children;
 var predict_plus = new Array();
 var predict_minus = new Array();
 for(var i=0;i<tr.length;i++){
-	if(tr[i].children[12].textContent.substr(0,1)=="+"){
-		predict_plus.push(Math.round(parseFloat(tr[i].children[12].textContent.substr(1))*0.01*parseFloat(tr[i].children[4].textContent.substr(1))));
-	} else {
+	if(tr[i].children[12].textContent.substr(0,1)=="-"){
 		predict_minus.push(Math.round(parseFloat(tr[i].children[12].textContent.substr(1))*0.01*parseFloat(tr[i].children[4].textContent.substr(1))));
+	} else {
+		predict_plus.push(Math.round(parseFloat(tr[i].children[12].textContent.substr(1))*0.01*parseFloat(tr[i].children[4].textContent.substr(1))));
 	}
 		
 }

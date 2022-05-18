@@ -118,10 +118,7 @@
 
 	<div class="container" align="center">
 	<div class="table_header" align="left">
-	<h4>Nickname&nbsp;&nbsp;
-		<select class="btn btn-outline-dark btn-sm">
-			<option selected>${nickname}</option>
-		</select>
+	<h4>Nickname&nbsp;&nbsp; <button class="btn btn-outline-dark btn-sm">${nickname}</button> 
 	</h4>
 	</div>
 	<table class="table border border-light border-3 table table-striped"">
